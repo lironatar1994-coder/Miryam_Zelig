@@ -180,6 +180,37 @@ section{padding:64px 0}
 .cta-mid{text-align:center;padding:8px 24px 60px}
 .cta-mid p{font-family:'Bellefair',serif;font-size:1.55rem;line-height:1.3;margin-bottom:18px}
 
+/* ---------- לפני / אחרי ---------- */
+.ba-section{background:var(--white);border-top:1px solid rgba(180,118,110,.2);border-bottom:1px solid rgba(180,118,110,.2)}
+.ba-wrap{padding:0 24px;max-width:420px;margin:0 auto}
+.ba{
+  position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.6;
+  box-shadow:0 16px 40px rgba(51,34,30,.16);touch-action:pan-y;user-select:none;
+}
+.ba:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.ba-before,.ba-after{position:absolute;inset:0}
+.ba-before img,.ba-after img{width:100%;height:100%;object-fit:cover}
+.ba-before img{filter:grayscale(.85) contrast(.92) brightness(1.04)}
+.ba-before::after{
+  content:'לפני';position:absolute;top:14px;right:14px;
+  background:rgba(51,34,30,.55);color:#fff;font-size:.72rem;letter-spacing:.14em;
+  padding:4px 12px;border-radius:999px;
+}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-after::after{
+  content:'אחרי';position:absolute;top:14px;left:14px;
+  background:var(--rose);color:#fff;font-size:.72rem;letter-spacing:.14em;
+  padding:4px 12px;border-radius:999px;
+}
+.ba-handle{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.25)}
+.ba-handle::after{
+  content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:44px;height:44px;border-radius:50%;background:#fff;color:var(--rose-deep);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+}
+.ba-caption{text-align:center;font-size:.8rem;color:#8F7269;margin-top:16px;letter-spacing:.04em}
+
 /* ---------- המלצות ---------- */
 .quotes{display:flex;gap:14px;overflow-x:auto;padding:6px 24px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
 .quotes::-webkit-scrollbar{display:none}
@@ -337,6 +368,22 @@ footer .a11y-note a{color:#B39289;text-decoration:none}
   <a class="insta-link reveal" href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">כל התיק עבודות באינסטגרם · <b>@makeup.by.miryam</b></a>
 </section>
 
+<!-- לפני אחרי -->
+<section class="ba-section">
+  <div class="section-head reveal">
+    <h2>לפני &amp; אחרי</h2>
+    <div class="line"></div>
+  </div>
+  <div class="ba-wrap reveal">
+    <div class="ba" id="ba" tabindex="0" role="slider" aria-label="השוואת לפני ואחרי — גררי או השתמשי בחיצי המקלדת" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <div class="ba-before"><img src="https://miryamzelig.netlify.app/gallery/img2.jpeg" alt="לפני האיפור"></div>
+      <div class="ba-after" id="baAfter"><img src="https://miryamzelig.netlify.app/gallery/img3.jpeg" alt="אחרי האיפור"></div>
+      <div class="ba-handle" id="baHandle"></div>
+    </div>
+    <div class="ba-caption">גררי את הידית כדי לראות את ההבדל ✦</div>
+  </div>
+</section>
+
 <!-- קריאה לפעולה אחרי הגלריה — נקודת ההחלטה -->
 <div class="cta-mid reveal">
   <p>רוצה מראה כזה באירוע שלך?</p>
@@ -481,6 +528,32 @@ const io=new IntersectionObserver(es=>{
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* סליידר לפני/אחרי */
+const ba=document.getElementById('ba');
+if(ba){
+  const after=document.getElementById('baAfter'),
+        handle=document.getElementById('baHandle');
+  let pos=.5;
+  function setP(p){
+    pos=Math.max(.06,Math.min(.94,p));
+    after.style.clipPath=`inset(0 0 0 ${pos*100}%)`;
+    handle.style.left=(pos*100)+'%';
+    ba.setAttribute('aria-valuenow',Math.round(pos*100));
+  }
+  function setPos(clientX){
+    const r=ba.getBoundingClientRect();
+    setP((clientX-r.left)/r.width);
+  }
+  let drag=false;
+  ba.addEventListener('pointerdown',e=>{drag=true;ba.setPointerCapture(e.pointerId);setPos(e.clientX)});
+  ba.addEventListener('pointermove',e=>drag&&setPos(e.clientX));
+  ba.addEventListener('pointerup',()=>drag=false);
+  ba.addEventListener('pointercancel',()=>drag=false);
+  ba.addEventListener('keydown',e=>{
+    if(e.key==='ArrowLeft'){setP(pos-.05);e.preventDefault()}
+    if(e.key==='ArrowRight'){setP(pos+.05);e.preventDefault()}
+  });
+}
 </script>
 </body>
 </html>
