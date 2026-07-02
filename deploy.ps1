@@ -54,7 +54,7 @@ if ($status -or -not $hasCommit) {
     }
 
     Write-Host "Staging and committing changes..." -ForegroundColor Gray
-    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore
+    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore gallery miryam.jpeg
     git commit -m "$Message"
 }
 else {
@@ -63,6 +63,9 @@ else {
 
 Write-Host "Pushing to GitHub..." -ForegroundColor Gray
 git push -u origin $Branch
+if ($LASTEXITCODE -ne 0) {
+    throw "Git push failed. Remote deployment was not started."
+}
 
 Write-Host "Ensuring remote checkout exists..." -ForegroundColor Blue
 $cloneCmd = "if [ ! -d '$RemoteDir/.git' ]; then rm -rf '$RemoteDir' && git clone '$RepoUrl' '$RemoteDir'; fi"
