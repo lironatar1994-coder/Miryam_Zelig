@@ -28,6 +28,8 @@ echo "[INFO] Copying static site to ${WEB_ROOT}..."
 mkdir -p "${WEB_ROOT}"
 rm -rf "${WEB_ROOT:?}/"*
 cp index.html "${WEB_ROOT}/index.html"
+cp -R gallery "${WEB_ROOT}/gallery"
+cp miryam.jpeg "${WEB_ROOT}/miryam.jpeg"
 
 echo "[INFO] Setting permissions..."
 chown -R www-data:www-data "${WEB_ROOT}"
