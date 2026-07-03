@@ -142,6 +142,12 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
   color:#fff;box-shadow:0 13px 28px rgba(158,95,88,.34);
 }
 .btn-ghost{border:1px solid rgba(51,34,30,.26);color:var(--espresso);background:rgba(255,255,255,.72);backdrop-filter:blur(10px)}
+.hero-scroll-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  color:var(--espresso);font-size:.95rem;text-decoration:none;
+  border-bottom:1px solid rgba(51,34,30,.34);padding:1px 2px 4px;
+}
+.hero-scroll-link .arrow{font-size:.9rem;color:var(--rose-deep);transform:translateY(1px)}
 .hero-trust{
   position:relative;z-index:2;width:min(760px,calc(100% - 48px));margin:30px auto 18px;
   display:grid;grid-template-columns:repeat(3,1fr);direction:ltr;color:var(--rose-deep);
@@ -368,16 +374,18 @@ section{padding:64px 0}
   .logo{font-size:1.22rem;letter-spacing:.17em;grid-column:auto;grid-row:auto;text-shadow:0 1px 16px rgba(253,248,246,.95)}
   .header-call,.menu-toggle{display:none}
   .hero-photo{inset:0 0 25%}
-  .hero-photo img{transform:translate(-5.5%,-11%) scale(1.24);filter:saturate(1.2) contrast(1.12) brightness(.98) sepia(.04)}
+  .hero-photo img{transform:translate(-5.5%,-11%) scale(1.24);filter:saturate(1.26) contrast(1.15) brightness(1) sepia(.02)}
   .hero-fade{
     background:
-      linear-gradient(to bottom,rgba(253,248,246,.02) 0%,rgba(253,248,246,0) 42%,rgba(251,239,232,.16) 49%,rgba(253,248,246,.68) 57%,rgba(253,248,246,.96) 69%,var(--porcelain) 84%),
-      radial-gradient(ellipse at center 59%,rgba(253,248,246,0) 0%,rgba(253,248,246,.14) 52%,rgba(253,248,246,.62) 87%);
+      linear-gradient(to bottom,rgba(253,248,246,.02) 0%,rgba(253,248,246,0) 41%,rgba(249,229,220,.18) 48%,rgba(253,248,246,.84) 56%,rgba(253,248,246,.98) 68%,var(--porcelain) 84%),
+      radial-gradient(ellipse at center 58%,rgba(253,248,246,0) 0%,rgba(253,248,246,.22) 50%,rgba(253,248,246,.72) 84%);
   }
-  .hero .eyebrow{font-size:.72rem;font-weight:500;color:#B06A62;margin-bottom:13px;text-shadow:0 1px 18px rgba(253,248,246,1),0 0 6px rgba(253,248,246,.86),0 0 1px rgba(51,34,30,.18)}
+  .hero .eyebrow{font-size:.72rem;font-weight:500;color:#A85F58;margin-bottom:13px;text-shadow:0 1px 18px rgba(253,248,246,1),0 0 7px rgba(253,248,246,.92)}
   .hero h1{font-size:3.62rem;margin-bottom:10px}
   .hero-divider{margin-bottom:13px}
   .hero p{font-size:.92rem;max-width:330px;margin-bottom:24px}
+  .btn-rose{background:linear-gradient(135deg,#C77D75 0%,#A45F58 100%);box-shadow:0 15px 32px rgba(158,95,88,.38)}
+  .hero-scroll-link{margin-top:2px;font-size:.92rem}
   .hero-trust{width:calc(100% - 36px);margin-top:24px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
@@ -435,7 +443,7 @@ section{padding:64px 0}
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.7 19.6 4.4 21l1.4-4A8.5 8.5 0 1 1 12 20.5a8.3 8.3 0 0 1-3.3-.9Z"/><path d="M9.4 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.7 1.6c.1.3.1.4-.1.6l-.4.5c-.1.1-.2.3-.1.5.3.6 1.2 1.9 2.7 2.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l1.7.8c.3.1.5.3.4.6-.1.8-.8 1.8-1.8 1.9-1.7.2-4.7-1.1-6.6-3.9-1.1-1.6-1.2-2.9-.9-3.6Z"/></svg>
         <span>לקביעת תור בוואטסאפ</span>
       </a>
-      <a class="btn btn-ghost" href="#works">לצפייה בעבודות שלי</a>
+      <a class="hero-scroll-link" href="#works"><span>לצפייה בעבודות שלי</span><span class="arrow" aria-hidden="true">↓</span></a>
     </div>
   </div>
   <div class="hero-trust" aria-label="יתרונות השירות">
