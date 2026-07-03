@@ -12,6 +12,29 @@ LOWER_ROUTE_BASE="/miryam_zelig"
 WEB_ROOT="/var/www/${APP_NAME}"
 NGINX_SITE="/etc/nginx/sites-available/vee-app.co.il.conf"
 NGINX_SNIPPET="/etc/nginx/snippets/${APP_NAME}-locations.conf"
+PRESERVE_DIR=""
+
+MANAGER_MANAGED_ASSETS=(
+  "gallery/img1.jpeg"
+  "gallery/img2.jpeg"
+  "gallery/img3.jpeg"
+  "gallery/img4.jpeg"
+  "gallery/img5.jpeg"
+  "gallery/img6.jpeg"
+  "gallery/img7.jpeg"
+  "gallery/img8.jpeg"
+  "gallery/before-after-before.jpeg"
+  "gallery/before-after-after.jpeg"
+  "miryam.jpeg"
+)
+
+cleanup() {
+  if [ -n "${PRESERVE_DIR}" ] && [ -d "${PRESERVE_DIR}" ]; then
+    rm -rf "${PRESERVE_DIR}"
+  fi
+}
+
+trap cleanup EXIT
 
 echo "[INFO] Starting ${APP_NAME} deployment..."
 
@@ -24,12 +47,37 @@ echo "[INFO] Pulling latest code..."
 git fetch origin main
 git reset --hard origin/main
 
+echo "[INFO] Preserving Manager Site managed images..."
+PRESERVE_DIR="$(mktemp -d)"
+for asset in "${MANAGER_MANAGED_ASSETS[@]}"; do
+  if [ -f "${WEB_ROOT}/${asset}" ]; then
+    mkdir -p "${PRESERVE_DIR}/$(dirname "${asset}")"
+    cp -p "${WEB_ROOT}/${asset}" "${PRESERVE_DIR}/${asset}"
+  fi
+done
+
+if [ -d "${WEB_ROOT}/.manager-site-backups" ]; then
+  cp -a "${WEB_ROOT}/.manager-site-backups" "${PRESERVE_DIR}/.manager-site-backups"
+fi
+
 echo "[INFO] Copying static site to ${WEB_ROOT}..."
 mkdir -p "${WEB_ROOT}"
 rm -rf "${WEB_ROOT:?}/"*
 cp index.html "${WEB_ROOT}/index.html"
 cp -R gallery "${WEB_ROOT}/gallery"
 cp miryam.jpeg "${WEB_ROOT}/miryam.jpeg"
+
+echo "[INFO] Restoring Manager Site managed images..."
+for asset in "${MANAGER_MANAGED_ASSETS[@]}"; do
+  if [ -f "${PRESERVE_DIR}/${asset}" ]; then
+    mkdir -p "${WEB_ROOT}/$(dirname "${asset}")"
+    cp -p "${PRESERVE_DIR}/${asset}" "${WEB_ROOT}/${asset}"
+  fi
+done
+
+if [ -d "${PRESERVE_DIR}/.manager-site-backups" ]; then
+  cp -a "${PRESERVE_DIR}/.manager-site-backups" "${WEB_ROOT}/.manager-site-backups"
+fi
 
 echo "[INFO] Setting permissions..."
 chown -R www-data:www-data "${WEB_ROOT}"

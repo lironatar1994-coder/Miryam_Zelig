@@ -54,7 +54,7 @@ if ($status -or -not $hasCommit) {
     }
 
     Write-Host "Staging and committing changes..." -ForegroundColor Gray
-    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore gallery miryam.jpeg
+    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore .gitattributes gallery miryam.jpeg
     git commit -m "$Message"
 }
 else {
