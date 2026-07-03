@@ -357,21 +357,24 @@ section{padding:64px 0}
 @media(max-width:480px){
   .hero{min-height:930px}
   header{
-    position:relative;top:auto;right:auto;left:auto;z-index:10;
+    position:absolute;top:0;right:0;left:0;z-index:20;
     min-height:78px;padding:0 24px;display:flex;justify-content:center;
-    background:rgba(253,248,246,.92);box-shadow:none;
+    background:rgba(253,248,246,.74);box-shadow:none;
+    border-bottom:1px solid rgba(180,118,110,.12);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
   }
-  header.scrolled{background:rgba(253,248,246,.92);border-color:rgba(180,118,110,.14);box-shadow:none}
-  .logo{font-size:1.22rem;letter-spacing:.17em;grid-column:auto;grid-row:auto}
+  header.scrolled{background:rgba(253,248,246,.82);border-color:rgba(180,118,110,.16);box-shadow:none}
+  .logo{font-size:1.22rem;letter-spacing:.17em;grid-column:auto;grid-row:auto;text-shadow:0 1px 16px rgba(253,248,246,.95)}
   .header-call,.menu-toggle{display:none}
   .hero-photo{inset:0 0 25%}
   .hero-photo img{transform:translate(-5.5%,-11%) scale(1.24);filter:saturate(1.2) contrast(1.12) brightness(.98) sepia(.04)}
   .hero-fade{
     background:
-      linear-gradient(to bottom,rgba(253,248,246,.02) 0%,rgba(253,248,246,0) 43%,rgba(251,239,232,.2) 50%,rgba(253,248,246,.68) 58%,rgba(253,248,246,.96) 70%,var(--porcelain) 84%),
-      radial-gradient(ellipse at center 58%,rgba(253,248,246,0) 0%,rgba(253,248,246,.05) 56%,rgba(253,248,246,.52) 88%);
+      linear-gradient(to bottom,rgba(253,248,246,.02) 0%,rgba(253,248,246,0) 42%,rgba(251,239,232,.16) 49%,rgba(253,248,246,.68) 57%,rgba(253,248,246,.96) 69%,var(--porcelain) 84%),
+      radial-gradient(ellipse at center 59%,rgba(253,248,246,0) 0%,rgba(253,248,246,.14) 52%,rgba(253,248,246,.62) 87%);
   }
-  .hero .eyebrow{font-size:.72rem;margin-bottom:13px}
+  .hero .eyebrow{font-size:.72rem;font-weight:500;color:#B06A62;margin-bottom:13px;text-shadow:0 1px 18px rgba(253,248,246,1),0 0 6px rgba(253,248,246,.86),0 0 1px rgba(51,34,30,.18)}
   .hero h1{font-size:3.62rem;margin-bottom:10px}
   .hero-divider{margin-bottom:13px}
   .hero p{font-size:.92rem;max-width:330px;margin-bottom:24px}
