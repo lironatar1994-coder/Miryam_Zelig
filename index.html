@@ -172,10 +172,11 @@ section{padding:64px 0}
 }
 .service .ic{
   flex:0 0 42px;height:42px;border-radius:50%;
-  background:linear-gradient(135deg,var(--blush),var(--rose-soft));
+  background:rgba(255,255,255,.72);border:1px solid rgba(180,118,110,.28);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.05rem;color:var(--rose-deep);
+  color:var(--rose-deep);
 }
+.service .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 .service h3{font-size:1.25rem;margin-bottom:2px}
 .service p{font-size:.85rem;color:#6B534B}
 
@@ -195,9 +196,11 @@ section{padding:64px 0}
 }
 .frame img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease}
 .frame.reveal:not(.in) img{transform:scale(1.06)}
-.gallery-hint{text-align:center;font-size:.72rem;letter-spacing:.12em;color:#7E5B53}
-.insta-link{display:block;text-align:center;margin-top:22px;color:var(--rose-deep);text-decoration:none;font-size:.9rem;letter-spacing:.06em}
-.insta-link b{font-weight:500;border-bottom:1px solid var(--rose-soft)}
+.insta-link{
+  display:flex;align-items:center;justify-content:center;width:max-content;max-width:calc(100% - 48px);
+  margin:20px auto 0;padding:10px 18px;border:1px solid rgba(180,118,110,.28);border-radius:999px;
+  color:var(--rose-deep);background:rgba(255,255,255,.62);text-decoration:none;font-size:.86rem;letter-spacing:.02em;
+}
 
 /* ---------- קריאה לפעולה באמצע הדף ---------- */
 .cta-mid{text-align:center;padding:8px 24px 60px}
@@ -368,6 +371,11 @@ section{padding:64px 0}
   .hero-trust{width:calc(100% - 36px);margin-top:24px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
+  .faq-list{gap:8px;padding:0 24px}
+  .faq{border-radius:12px;padding:0 15px;background:rgba(255,255,255,.78)}
+  .faq summary{padding:12px 0;font-size:.88rem;gap:8px}
+  .faq summary::after{font-size:1.1rem}
+  .faq p{font-size:.82rem;line-height:1.7;padding-bottom:13px}
 }
 
 /* ---------- דסקטופ ---------- */
@@ -396,8 +404,8 @@ section{padding:64px 0}
 
 <header id="header">
   <div class="logo">MIRYAM <span>ZELIG</span></div>
-  <a class="header-call" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור" aria-label="יצירת קשר בוואטסאפ">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.7 19.6 4.4 21l1.4-4A8.5 8.5 0 1 1 12 20.5a8.3 8.3 0 0 1-3.3-.9Z"/><path d="M9.4 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.7 1.6c.1.3.1.4-.1.6l-.4.5c-.1.1-.2.3-.1.5.3.6 1.2 1.9 2.7 2.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l1.7.8c.3.1.5.3.4.6-.1.8-.8 1.8-1.8 1.9-1.7.2-4.7-1.1-6.6-3.9-1.1-1.6-1.2-2.9-.9-3.6Z"/></svg>
+  <a class="header-call" href="tel:0546002942" aria-label="התקשרות למרים זליג">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 4.4 9 3.5c.6-.2 1.2.1 1.5.6l1.1 2.6c.2.5.1 1-.3 1.4L10 9.4c.9 1.8 2.3 3.2 4.1 4.1l1.3-1.3c.4-.4.9-.5 1.4-.3l2.6 1.1c.6.2.8.9.6 1.5l-.9 2.4c-.2.5-.7.8-1.2.8C10.8 17.5 6.5 13.2 6.3 6c0-.6.3-1.1.8-1.3Z"/></svg>
     <span>התקשרי</span>
   </a>
   <a class="menu-toggle" href="#contact" aria-label="מעבר ליצירת קשר"><span></span><span></span><span></span></a>
@@ -452,7 +460,7 @@ section{padding:64px 0}
     <div class="frame reveal"><img src="/Miryam_Zelig/gallery/img7.jpeg" alt="עבודת איפור של מרים זליג — מראה 6" loading="lazy"></div>
     <div class="frame reveal"><img src="/Miryam_Zelig/gallery/img8.jpeg" alt="עבודת איפור של מרים זליג — מראה 7" loading="lazy"></div>
   </div>
-  <a class="insta-link reveal" href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">כל התיק עבודות באינסטגרם · <b>@makeup.by.miryam</b></a>
+  <a class="insta-link reveal" href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">עוד עבודות באינסטגרם</a>
 </section>
 
 <!-- לפני אחרי -->
@@ -484,15 +492,15 @@ section{padding:64px 0}
   </div>
   <div class="services">
     <div class="service reveal">
-      <div class="ic">✦</div>
+      <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 5v22M6 16h20"/><path d="M10 10c4 1.2 6.8 4 8 8M22 10c-4 1.2-6.8 4-8 8"/></svg></div>
       <div><h3>איפור כלות</h3><p>ביום כזה, את רוצה להרגיש הכי יפה שלך — אבל עדיין להרגיש את. אני יוצרת לך מראה מדויק, עמיד ומחמיא, בקצב רגוע ועם הרבה הקשבה למה שנכון לך.</p></div>
     </div>
     <div class="service reveal">
-      <div class="ic">✧</div>
+      <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4l3.2 8.8L28 16l-8.8 3.2L16 28l-3.2-8.8L4 16l8.8-3.2L16 4Z"/></svg></div>
       <div><h3>איפור ערב ואירועים</h3><p>לאירועים, צילומים ורגעים שבא לך להרגיש בהם קצת יותר זוהרת. איפור שמתאים לסגנון שלך, מחזיק יפה, ומרגיש נעים גם אחרי שעות.</p></div>
     </div>
     <div class="service reveal">
-      <div class="ic">➤</div>
+      <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s8-8.1 8-15a8 8 0 1 0-16 0c0 6.9 8 15 8 15Z"/><circle cx="16" cy="13" r="2.8"/></svg></div>
       <div><h3>אני מגיעה אלייך</h3><p>בבית, במלון או במקום ההתארגנות — אני מגיעה עם כל מה שצריך, כדי שהיום שלך יתחיל רגוע, נעים ובלי ריצות מיותרות.</p></div>
     </div>
   </div>
