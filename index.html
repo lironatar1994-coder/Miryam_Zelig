@@ -287,23 +287,29 @@ section{padding:64px 0}
 .faq p{font-size:.88rem;color:#6B534B;padding-bottom:16px}
 
 /* ---------- יצירת קשר ---------- */
-.contact{background:var(--espresso);color:var(--porcelain);text-align:center;padding:70px 26px 84px}
-.contact .eyebrow{color:var(--rose-soft)}
-.contact h2{font-size:2.3rem;margin-bottom:12px;color:#F8EDE8}
-.contact p{font-size:.92rem;color:#CDB2AA;max-width:300px;margin:0 auto 30px}
+.contact{
+  background:
+    linear-gradient(180deg,#FFFDFC 0%,#FCF4F1 54%,#F8EDEA 100%);
+  color:var(--espresso);text-align:center;padding:68px 26px 74px;
+  border-top:1px solid rgba(180,118,110,.14);
+}
+.contact .eyebrow{color:var(--rose-deep);letter-spacing:.22em}
+.contact h2{font-size:2.55rem;margin-bottom:14px;color:var(--espresso)}
+.contact p{font-size:.95rem;line-height:1.85;color:#725850;max-width:310px;margin:0 auto 30px}
 .contact-ctas{display:flex;flex-direction:column;gap:12px;max-width:320px;margin:0 auto}
-.btn-wa{background:#25D366;color:#fff;box-shadow:0 8px 24px rgba(37,211,102,.3)}
-.btn-call2{border:1px solid var(--rose-soft);color:#F2DED8}
-.contact .insta{margin-top:26px;font-size:.85rem}
-.contact .insta a{color:var(--rose-soft);text-decoration:none;letter-spacing:.06em}
+.btn-wa{
+  background:linear-gradient(135deg,#C9867E,var(--rose-deep));
+  color:#fff;box-shadow:0 14px 28px rgba(158,95,88,.28);
+}
+.btn-call2{border:1px solid rgba(51,34,30,.22);color:var(--espresso);background:rgba(255,255,255,.62)}
 
 .site-footer{
   background:
     linear-gradient(180deg,#33221E 0%,#261814 100%);
-  color:#F8EDE8;padding:42px 24px 24px;text-align:right;
+  color:#F8EDE8;padding:38px 24px 22px;text-align:right;
   border-top:1px solid rgba(217,168,160,.28);
 }
-.footer-inner{max-width:920px;margin:0 auto;display:grid;gap:28px}
+.footer-inner{max-width:920px;margin:0 auto;display:grid;gap:24px}
 .footer-brand{text-align:center}
 .footer-logo{
   direction:ltr;unicode-bidi:isolate;
@@ -312,23 +318,18 @@ section{padding:64px 0}
 }
 .footer-logo span{color:var(--rose-soft)}
 .footer-brand p{max-width:310px;margin:0 auto;color:#D5BBB3;font-size:.9rem;line-height:1.8}
-.footer-links,.footer-contact{display:grid;gap:12px;justify-items:center}
+.footer-links{display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:12px 22px;justify-items:center;max-width:330px;margin:0 auto}
+.footer-meta{display:grid;gap:10px;justify-items:center}
 .footer-title{font-size:.76rem;letter-spacing:.16em;color:var(--rose-soft);text-transform:uppercase;margin-bottom:2px}
-.footer-links a,.footer-contact a{
+.footer-title{grid-column:1/-1}
+.footer-links a,.footer-meta a{
   color:#F4E3DD;text-decoration:none;font-size:.92rem;
   transition:color .25s,transform .25s;
 }
-.footer-links a:active,.footer-contact a:active,
-.footer-links a:hover,.footer-contact a:hover{color:#fff;transform:translateY(-1px)}
-.footer-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.footer-action{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  min-width:136px;border:1px solid rgba(217,168,160,.45);border-radius:999px;
-  padding:10px 15px;background:rgba(255,255,255,.04);
-}
-.footer-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.footer-links a:active,.footer-meta a:active,
+.footer-links a:hover,.footer-meta a:hover{color:#fff;transform:translateY(-1px)}
 .footer-bottom{
-  max-width:920px;margin:30px auto 0;padding-top:16px;border-top:1px solid rgba(217,168,160,.18);
+  max-width:920px;margin:26px auto 0;padding-top:15px;border-top:1px solid rgba(217,168,160,.18);
   color:#B8948B;text-align:center;font-size:.72rem;line-height:1.8;letter-spacing:.04em;
 }
 .footer-bottom a{color:#D9A8A0;text-decoration:none}
@@ -384,8 +385,8 @@ section{padding:64px 0}
   .footer-inner{grid-template-columns:1.2fr .8fr 1fr;align-items:start}
   .footer-brand{text-align:right}
   .footer-brand p{margin:0}
-  .footer-links,.footer-contact{justify-items:start}
-  .footer-actions{justify-content:flex-start}
+  .footer-links{margin:0;justify-items:start}
+  .footer-meta{justify-items:start}
 }
 </style>
 </head>
@@ -573,13 +574,12 @@ section{padding:64px 0}
 <section class="contact" id="contact">
   <div class="reveal">
     <div class="eyebrow">בואי נדבר</div>
-    <h2>הרגע שלך מתקרב?</h2>
-    <p>שלחי הודעה ונתאם את האיפור המושלם בשבילך — התאריכים מתמלאים מהר.</p>
+    <h2>נסגור לך תאריך?</h2>
+    <p>שלחי הודעה קצרה ונבדוק יחד זמינות, סגנון ומיקום.</p>
     <div class="contact-ctas">
-      <a class="btn btn-wa" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">שלחי הודעת וואטסאפ</a>
-      <a class="btn btn-call2" href="tel:0546002942">✆ 054-600-2942</a>
+      <a class="btn btn-wa" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">לקביעת תור בוואטסאפ</a>
+      <a class="btn btn-call2" href="tel:0546002942">054-600-2942</a>
     </div>
-    <div class="insta"><a href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">Instagram · @makeup.by.miryam</a></div>
   </div>
 </section>
 
@@ -598,25 +598,16 @@ section{padding:64px 0}
       <a href="#contact">יצירת קשר</a>
     </nav>
 
-    <div class="footer-contact">
-      <div class="footer-title">לדבר איתי</div>
-      <div class="footer-actions">
-        <a class="footer-action" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.7 19.6 4.4 21l1.4-4A8.5 8.5 0 1 1 12 20.5a8.3 8.3 0 0 1-3.3-.9Z"/><path d="M9.4 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.7 1.6c.1.3.1.4-.1.6l-.4.5c-.1.1-.2.3-.1.5.3.6 1.2 1.9 2.7 2.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l1.7.8c.3.1.5.3.4.6-.1.8-.8 1.8-1.8 1.9-1.7.2-4.7-1.1-6.6-3.9-1.1-1.6-1.2-2.9-.9-3.6Z"/></svg>
-          וואטסאפ
-        </a>
-        <a class="footer-action" href="tel:0546002942">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 4.4 9 3.5c.6-.2 1.2.1 1.5.6l1.1 2.6c.2.5.1 1-.3 1.4L10 9.4c.9 1.8 2.3 3.2 4.1 4.1l1.3-1.3c.4-.4.9-.5 1.4-.3l2.6 1.1c.6.2.8.9.6 1.5l-.9 2.4c-.2.5-.7.8-1.2.8C10.8 17.5 6.5 13.2 6.3 6c0-.6.3-1.1.8-1.3Z"/></svg>
-          054-600-2942
-        </a>
-      </div>
+    <div class="footer-meta">
+      <div class="footer-title">להישאר בקשר</div>
       <a href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">Instagram · @makeup.by.miryam</a>
+      <a href="tel:0546002942">054-600-2942</a>
     </div>
   </div>
 
   <div class="footer-bottom">
     <div dir="ltr">MIRYAM ZELIG · © 2026</div>
-    <div>נתקלת בקושי בשימוש באתר? נשמח לעזור: <a href="tel:0546002942">054-600-2942</a></div>
+    <div>נשמח לעזור בכל קושי בשימוש באתר: <a href="tel:0546002942">054-600-2942</a></div>
   </div>
 </footer>
 
