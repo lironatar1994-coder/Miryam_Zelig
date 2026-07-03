@@ -351,12 +351,14 @@ section{padding:64px 0}
 
 @media(max-width:480px){
   .hero{min-height:930px}
-  header{min-height:86px;padding:0 20px;gap:10px}
-  .logo{font-size:1.08rem;letter-spacing:.12em}
-  .header-call{font-size:.76rem;padding:7px 13px}
-  .header-call svg{width:16px;height:16px}
-  .menu-toggle{width:34px;height:34px;gap:6px}
-  .menu-toggle span{width:26px}
+  header{
+    position:relative;top:auto;right:auto;left:auto;z-index:10;
+    min-height:78px;padding:0 24px;display:flex;justify-content:center;
+    background:rgba(253,248,246,.92);box-shadow:none;
+  }
+  header.scrolled{background:rgba(253,248,246,.92);border-color:rgba(180,118,110,.14);box-shadow:none}
+  .logo{font-size:1.22rem;letter-spacing:.17em;grid-column:auto;grid-row:auto}
+  .header-call,.menu-toggle{display:none}
   .hero-photo{inset:0 0 25%}
   .hero-photo img{transform:translateY(-11%) scale(1.24);filter:saturate(1.2) contrast(1.12) brightness(.98) sepia(.04)}
   .hero-fade{
