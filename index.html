@@ -313,15 +313,25 @@ footer .a11y-note a{color:#B39289;text-decoration:none}
 }
 
 @media(max-width:480px){
-  .hero{min-height:940px}
+  .hero{min-height:930px}
   header{min-height:86px;padding:0 20px;gap:10px}
-  .logo{font-size:1rem;letter-spacing:.11em}
+  .logo{font-size:1.08rem;letter-spacing:.12em}
   .header-call{font-size:.76rem;padding:7px 13px}
   .header-call svg{width:16px;height:16px}
   .menu-toggle{width:34px;height:34px;gap:6px}
   .menu-toggle span{width:26px}
-  .hero p{font-size:.92rem;max-width:330px}
-  .hero-trust{width:calc(100% - 36px);margin-top:26px}
+  .hero-photo{inset:0 0 25%}
+  .hero-photo img{transform:translateY(-11%) scale(1.24)}
+  .hero-fade{
+    background:
+      linear-gradient(to bottom,rgba(253,248,246,.02) 0%,rgba(253,248,246,0) 34%,rgba(253,248,246,.3) 49%,rgba(253,248,246,.88) 64%,var(--porcelain) 80%),
+      radial-gradient(ellipse at center 47%,rgba(253,248,246,0) 0%,rgba(253,248,246,.18) 52%,rgba(253,248,246,.82) 86%);
+  }
+  .hero .eyebrow{font-size:.72rem;margin-bottom:13px}
+  .hero h1{font-size:3.62rem;margin-bottom:10px}
+  .hero-divider{margin-bottom:13px}
+  .hero p{font-size:.92rem;max-width:330px;margin-bottom:24px}
+  .hero-trust{width:calc(100% - 36px);margin-top:24px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
 }
