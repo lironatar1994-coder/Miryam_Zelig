@@ -278,18 +278,6 @@ footer{background:#291A16;color:#8E6F66;text-align:center;font-size:.72rem;lette
 footer .a11y-note{margin-top:6px;letter-spacing:.02em}
 footer .a11y-note a{color:#B39289;text-decoration:none}
 
-/* ---------- וואטסאפ צף — מופיע רק אחרי גלילה מעבר להירו ---------- */
-.float-wa{
-  position:fixed;bottom:20px;left:18px;z-index:60;
-  width:56px;height:56px;border-radius:50%;
-  background:#25D366;display:flex;align-items:center;justify-content:center;
-  box-shadow:0 8px 22px rgba(37,211,102,.45);text-decoration:none;
-  opacity:0;transform:translateY(12px);pointer-events:none;
-  transition:opacity .4s,transform .4s;
-}
-.float-wa.show{opacity:1;transform:none;pointer-events:auto}
-.float-wa svg{width:28px;height:28px;fill:#fff}
-
 /* ---------- אנימציות גילוי ---------- */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
@@ -298,7 +286,6 @@ footer .a11y-note a{color:#B39289;text-decoration:none}
   .frame.reveal:not(.in) img{transform:none}
   .frame img{transition:none}
   .hero-scroll{animation:none}
-  .float-wa{transition:none;transform:none}
   html{scroll-behavior:auto}
 }
 
@@ -502,17 +489,10 @@ footer .a11y-note a{color:#B39289;text-decoration:none}
   <div class="a11y-note">נתקלת בקושי בשימוש באתר? נשמח לעזור: <a href="tel:0546002942">054-600-2942</a></div>
 </footer>
 
-<!-- וואטסאפ צף -->
-<a class="float-wa" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור" aria-label="שליחת הודעת וואטסאפ למרים">
-  <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.6.8 5 2.3 7L4 29l7.2-2.3c1.9 1 4 1.6 6.2 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 21.8c-2 0-3.9-.6-5.5-1.6l-.4-.2-4.1 1.3 1.3-4-.3-.4C5.7 18.4 5 16.7 5 15 5 9 9.9 4 16 4s11 5 11 11-4.9 9.8-11 9.8zm5.7-7.1c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1c-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.5c.2-.2.2-.3.3-.5s.1-.4 0-.5c-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4S9.6 11.4 9.6 13s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.6 4.9.8.3 1.4.5 1.9.7.8.2 1.5.2 2.1.1.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.3.2-1.5-.1-.1-.3-.2-.6-.3z"/></svg>
-</a>
-
 <script>
-const header=document.getElementById('header'),
-      floatWa=document.querySelector('.float-wa');
+const header=document.getElementById('header');
 function onScroll(){
   header.classList.toggle('scrolled',scrollY>40);
-  floatWa.classList.toggle('show',scrollY>innerHeight*.75);
 }
 addEventListener('scroll',onScroll,{passive:true});
 onScroll();
