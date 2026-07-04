@@ -141,12 +141,6 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
   background:linear-gradient(135deg,#C2857D,var(--rose-deep));
   color:#fff;box-shadow:0 13px 28px rgba(158,95,88,.34);
 }
-.btn-inspire{
-  background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(253,248,246,.82));
-  color:var(--espresso);
-  border:1px solid rgba(154,85,78,.34);
-  box-shadow:0 12px 28px rgba(51,34,30,.08),inset 0 0 0 1px rgba(255,255,255,.62);
-}
 .btn-ghost{border:1px solid rgba(51,34,30,.26);color:var(--espresso);background:rgba(255,255,255,.72);backdrop-filter:blur(10px)}
 .hero-scroll-link{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -154,12 +148,6 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
   border-bottom:1px solid rgba(51,34,30,.34);padding:1px 2px 4px;
 }
 .hero-scroll-link .arrow{font-size:.9rem;color:var(--rose-deep);transform:translateY(1px)}
-.hero-whatsapp-link{
-  display:inline-flex;align-items:center;justify-content:center;gap:7px;
-  color:#5F403A;text-decoration:none;font-size:.92rem;
-  border-bottom:1px solid rgba(95,64,58,.34);padding:2px 2px 4px;
-}
-.hero-whatsapp-link svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .hero-trust{
   position:relative;z-index:2;width:min(760px,calc(100% - 48px));margin:30px auto 18px;
   display:grid;grid-template-columns:repeat(3,1fr);direction:ltr;color:var(--rose-deep);
@@ -398,8 +386,6 @@ section{padding:64px 0}
   .hero p{font-size:.92rem;max-width:330px;margin-bottom:24px}
   .hero .btn{width:min(66vw,310px);min-width:232px;padding:13px 24px;font-size:.96rem}
   .hero .btn svg{width:22px;height:22px}
-  .hero .btn-inspire{width:min(70vw,330px);min-width:248px;padding:14px 26px;font-size:.98rem}
-  .hero-whatsapp-link{margin-top:2px;font-size:.9rem}
   .btn-rose{background:linear-gradient(135deg,#C27A72 0%,#A06059 100%);box-shadow:0 12px 26px rgba(158,95,88,.3)}
   .hero-scroll-link{margin-top:4px;font-size:.95rem;font-weight:400;color:#3F2924;border-bottom-color:rgba(63,41,36,.42)}
   .hero-scroll-link .arrow{color:#A06059}
@@ -456,14 +442,11 @@ section{padding:64px 0}
     <div class="hero-divider" aria-hidden="true"><span></span></div>
     <p>איפור כלות וערב עד אלייך — במראה יוקרתי,<br>נקי ובלתי נשכח.</p>
     <div class="hero-ctas">
-      <a class="btn btn-inspire" href="#works">
-        <span>לצפייה בעבודות שלי</span>
-        <span aria-hidden="true">↓</span>
-      </a>
-      <a class="hero-whatsapp-link" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">
+      <a class="btn btn-rose" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.7 19.6 4.4 21l1.4-4A8.5 8.5 0 1 1 12 20.5a8.3 8.3 0 0 1-3.3-.9Z"/><path d="M9.4 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.5l.7 1.6c.1.3.1.4-.1.6l-.4.5c-.1.1-.2.3-.1.5.3.6 1.2 1.9 2.7 2.5.2.1.4.1.6-.1l.7-.8c.2-.2.4-.3.7-.2l1.7.8c.3.1.5.3.4.6-.1.8-.8 1.8-1.8 1.9-1.7.2-4.7-1.1-6.6-3.9-1.1-1.6-1.2-2.9-.9-3.6Z"/></svg>
-        <span>לבדיקת זמינות בוואטסאפ</span>
+        <span>לקביעת תור בוואטסאפ</span>
       </a>
+      <a class="hero-scroll-link" href="#works"><span>לצפייה בעבודות שלי</span><span class="arrow" aria-hidden="true">↓</span></a>
     </div>
   </div>
   <div class="hero-trust" aria-label="יתרונות השירות">
@@ -486,7 +469,7 @@ section{padding:64px 0}
 <!-- גלריה — קודם מראים את העבודות, אחר כך מספרים -->
 <section id="works">
   <div class="section-head reveal">
-    <h2>השראה למראה שלך</h2>
+    <h2>מבחר עבודות</h2>
     <div class="line"></div>
   </div>
   <div class="gallery">
@@ -525,8 +508,8 @@ section{padding:64px 0}
 
 <!-- קריאה לפעולה אחרי הגלריה — נקודת ההחלטה -->
 <div class="cta-mid reveal">
-  <p>אהבת את הסגנון?</p>
-  <a class="btn btn-rose" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20ראיתי%20את%20העבודות%20שלך%20באתר%20ואשמח%20לשמוע%20פרטים">נבדוק יחד זמינות</a>
+  <p>רוצה מראה כזה באירוע שלך?</p>
+  <a class="btn btn-rose" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20ראיתי%20את%20העבודות%20שלך%20באתר%20ואשמח%20לשמוע%20פרטים">דברי איתי בוואטסאפ</a>
 </div>
 
 <!-- שירותים -->
@@ -626,11 +609,11 @@ section{padding:64px 0}
 <!-- יצירת קשר -->
 <section class="contact" id="contact">
   <div class="reveal">
-    <div class="eyebrow">הצעד הבא</div>
-    <h2>אהבת את הסגנון?</h2>
-    <p>נבדוק יחד זמינות, מיקום ואת הכיוון המדויק למראה שאת רוצה.</p>
+    <div class="eyebrow">בואי נדבר</div>
+    <h2>נסגור לך תאריך?</h2>
     <div class="contact-ctas">
-      <a class="btn btn-wa" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20ראיתי%20את%20העבודות%20שלך%20באתר%20ואשמח%20לשמוע%20פרטים">לבדיקת זמינות בוואטסאפ</a>
+      <a class="btn btn-wa" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">לקביעת תור בוואטסאפ</a>
+      <a class="btn btn-call2" href="tel:0546002942">054-600-2942</a>
     </div>
   </div>
 </section>
