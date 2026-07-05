@@ -271,7 +271,14 @@ section{padding:62px 0}
   background:var(--rose);color:#fff;font-size:.72rem;letter-spacing:.14em;
   padding:4px 12px;border-radius:999px;
 }
-.ba-handle{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50%;transform:translateX(-50%);box-shadow:0 0 12px rgba(0,0,0,.25)}
+.ba-handle{
+  position:absolute;top:0;bottom:0;width:54px;left:50%;transform:translateX(-50%);
+  cursor:ew-resize;touch-action:none;
+}
+.ba-handle::before{
+  content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);
+  background:#fff;box-shadow:0 0 12px rgba(0,0,0,.25);
+}
 .ba-handle::after{
   content:'⇄';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:44px;height:44px;border-radius:50%;background:#fff;color:var(--rose-deep);
@@ -739,10 +746,10 @@ if(ba){
     setP((clientX-r.left)/r.width);
   }
   let drag=false;
-  ba.addEventListener('pointerdown',e=>{drag=true;ba.setPointerCapture(e.pointerId);setPos(e.clientX)});
-  ba.addEventListener('pointermove',e=>drag&&setPos(e.clientX));
-  ba.addEventListener('pointerup',()=>drag=false);
-  ba.addEventListener('pointercancel',()=>drag=false);
+  handle.addEventListener('pointerdown',e=>{drag=true;handle.setPointerCapture(e.pointerId);setPos(e.clientX);e.preventDefault()});
+  handle.addEventListener('pointermove',e=>drag&&setPos(e.clientX));
+  handle.addEventListener('pointerup',()=>drag=false);
+  handle.addEventListener('pointercancel',()=>drag=false);
   ba.addEventListener('keydown',e=>{
     if(e.key==='ArrowLeft'){setP(pos-.05);e.preventDefault()}
     if(e.key==='ArrowRight'){setP(pos+.05);e.preventDefault()}
