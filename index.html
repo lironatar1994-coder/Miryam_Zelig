@@ -37,17 +37,6 @@
 }
 </script>
 
-<!-- TODO: אנליטיקס — להחליף G-XXXXXXXXXX במזהה GA4 אמיתי ולהסיר את ההערה
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-<script>
-window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
-gtag('js',new Date());gtag('config','G-XXXXXXXXXX');
-document.addEventListener('click',e=>{
-  const a=e.target.closest('a[href*="wa.me"],a[href^="tel:"]');
-  if(a)gtag('event','contact_click',{method:a.href.includes('wa.me')?'whatsapp':'phone'});
-});
-</script>
--->
 
 <style>
 :root{
@@ -631,8 +620,8 @@ section{padding:62px 0}
 <section class="about">
   <div class="about-inner reveal">
     <div class="about-photo"><img src="/Miryam_Zelig/miryam.jpeg" alt="מרים זליג" loading="lazy"></div>
-    <h2>נעים להכיר, אני מרים</h2>
-    <p>מאפרת מקצועית עם ניסיון רב בתחום. אני מאמינה שכל אישה ראויה להרגיש את הגרסה הכי יפה של עצמה — עם תשומת לב לפרטים הקטנים ומוצרים איכותיים, אני יוצרת מראה מושלם שמחמיא לך באופן אישי.</p>
+    <h2 data-manager-text="about.title">נעים להכיר, אני מרים</h2>
+    <p data-manager-text="about.body">מאפרת מקצועית עם ניסיון רב בתחום. אני מאמינה שכל אישה ראויה להרגיש את הגרסה הכי יפה של עצמה — עם תשומת לב לפרטים הקטנים ומוצרים איכותיים, אני יוצרת מראה מושלם שמחמיא לך באופן אישי.</p>
     <div class="badges">
       <span class="badge">✦ תעודת מקצוע</span>
       <span class="badge">✦ מוצרי יוקרה בלבד</span>
@@ -642,7 +631,6 @@ section{padding:62px 0}
 </section>
 
 <!-- שאלות נפוצות -->
-<!-- TODO: לאשר את התשובות מול מרים (במיוחד איפור ניסיון וזמנים) ולעדכן במידת הצורך -->
 <section>
   <div class="section-head reveal">
     <h2>שאלות נפוצות</h2>
@@ -650,24 +638,24 @@ section{padding:62px 0}
   </div>
   <div class="faq-list reveal">
     <details class="faq">
-      <summary>את מגיעה עד אליי?</summary>
-      <p>כן! השירות הוא עד פתח הבית, המלון או מקום האירוע — בכל רחבי הארץ. את מתארגנת בנוחות, אני מביאה הכל.</p>
+      <summary data-manager-text="faq.1.question">את מגיעה עד אליי?</summary>
+      <p data-manager-text="faq.1.answer">כן! השירות הוא עד פתח הבית, המלון או מקום האירוע — בכל רחבי הארץ. את מתארגנת בנוחות, אני מביאה הכל.</p>
     </details>
     <details class="faq">
-      <summary>כמה עולה איפור?</summary>
-      <p>המחיר משתנה לפי סוג האיפור (כלה / ערב), מספר המתאפרות והמיקום. שלחי הודעה בוואטסאפ עם תאריך ופרטים — ותקבלי הצעת מחיר מהירה.</p>
+      <summary data-manager-text="faq.2.question">כמה עולה איפור?</summary>
+      <p data-manager-text="faq.2.answer">המחיר משתנה לפי סוג האיפור (כלה / ערב), מספר המתאפרות והמיקום. שלחי הודעה בוואטסאפ עם תאריך ופרטים — ותקבלי הצעת מחיר מהירה.</p>
     </details>
     <details class="faq">
-      <summary>אפשר לקבוע איפור ניסיון לפני החתונה?</summary>
-      <p>בהחלט, ואפילו מומלץ — ככה מגיעות ליום החתונה רגועות לגמרי, עם מראה שכבר סגרנו עליו יחד.</p>
+      <summary data-manager-text="faq.3.question">אפשר לקבוע איפור ניסיון לפני החתונה?</summary>
+      <p data-manager-text="faq.3.answer">בהחלט, ואפילו מומלץ — ככה מגיעות ליום החתונה רגועות לגמרי, עם מראה שכבר סגרנו עליו יחד.</p>
     </details>
     <details class="faq">
-      <summary>האיפור יחזיק לאורך כל האירוע?</summary>
-      <p>כן. אני עובדת עם מוצרי היוקרה המובילים בעולם ובטכניקות עמידות, כך שהאיפור נשאר מושלם מהצילומים ועד סוף הלילה.</p>
+      <summary data-manager-text="faq.4.question">האיפור יחזיק לאורך כל האירוע?</summary>
+      <p data-manager-text="faq.4.answer">כן. אני עובדת עם מוצרי היוקרה המובילים בעולם ובטכניקות עמידות, כך שהאיפור נשאר מושלם מהצילומים ועד סוף הלילה.</p>
     </details>
     <details class="faq">
-      <summary>כמה זמן מראש כדאי לסגור תאריך?</summary>
-      <p>כמה שיותר מוקדם — במיוחד בעונת החתונות התאריכים מתמלאים מהר. שלחי הודעה ונבדוק זמינות לתאריך שלך.</p>
+      <summary data-manager-text="faq.5.question">כמה זמן מראש כדאי לסגור תאריך?</summary>
+      <p data-manager-text="faq.5.answer">כמה שיותר מוקדם — במיוחד בעונת החתונות התאריכים מתמלאים מהר. שלחי הודעה ונבדוק זמינות לתאריך שלך.</p>
     </details>
   </div>
 </section>
