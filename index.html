@@ -745,11 +745,20 @@ if(ba){
     const r=ba.getBoundingClientRect();
     setP((clientX-r.left)/r.width);
   }
-  let drag=false;
-  handle.addEventListener('pointerdown',e=>{drag=true;handle.setPointerCapture(e.pointerId);setPos(e.clientX);e.preventDefault()});
-  handle.addEventListener('pointermove',e=>drag&&setPos(e.clientX));
-  handle.addEventListener('pointerup',()=>drag=false);
-  handle.addEventListener('pointercancel',()=>drag=false);
+  let drag=false,startX=0,moved=false;
+  handle.addEventListener('pointerdown',e=>{
+    drag=true;moved=false;startX=e.clientX;
+    handle.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  });
+  handle.addEventListener('pointermove',e=>{
+    if(!drag)return;
+    if(!moved&&Math.abs(e.clientX-startX)<4)return;
+    moved=true;
+    setPos(e.clientX);
+  });
+  handle.addEventListener('pointerup',()=>{drag=false;moved=false});
+  handle.addEventListener('pointercancel',()=>{drag=false;moved=false});
   ba.addEventListener('keydown',e=>{
     if(e.key==='ArrowLeft'){setP(pos-.05);e.preventDefault()}
     if(e.key==='ArrowRight'){setP(pos+.05);e.preventDefault()}
