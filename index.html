@@ -567,6 +567,15 @@ section{padding:62px 0}
   .footer-brand{grid-column:1/-1;text-align:center}
 }
 
+@media(min-width:820px){
+  .gallery .reveal{
+    opacity:1;
+    transform:none;
+  }
+  .gallery .frame.reveal:not(.in) img{transform:none}
+  .gallery .frame img{transition:transform .7s ease}
+}
+
 @media(min-width:1100px){
   header{
     min-height:70px;
@@ -579,7 +588,7 @@ section{padding:62px 0}
   .menu-toggle span{width:27px}
 
   .hero{
-    min-height:780px;
+    min-height:720px;
     justify-content:center;
     align-items:flex-end;
     padding:0 7vw 0 0!important;
@@ -595,16 +604,16 @@ section{padding:62px 0}
   .hero-photo img{
     transform:none;
     object-position:center top;
-    filter:saturate(1.1) contrast(1.06) brightness(1.01) sepia(.02);
+    filter:saturate(1.13) contrast(1.09) brightness(1.02) sepia(.015);
   }
   .hero-fade{
     background:
-      linear-gradient(90deg,rgba(253,248,246,0) 0%,rgba(253,248,246,.03) 43%,rgba(253,248,246,.7) 56%,var(--porcelain) 69%),
-      linear-gradient(to top,var(--porcelain) 0%,rgba(253,248,246,.42) 16%,rgba(253,248,246,0) 40%);
+      linear-gradient(90deg,rgba(253,248,246,0) 0%,rgba(253,248,246,.02) 44%,rgba(253,248,246,.58) 57%,var(--porcelain) 70%),
+      linear-gradient(to top,var(--porcelain) 0%,rgba(253,248,246,.34) 14%,rgba(253,248,246,0) 38%);
   }
   .hero-content{
     width:min(520px,40vw);
-    margin:0 0 110px auto;
+    margin:0 0 88px auto;
     padding:0;
     text-align:right;
   }
@@ -644,7 +653,7 @@ section{padding:62px 0}
     position:absolute;
     z-index:3;
     right:7vw;
-    bottom:74px;
+    bottom:54px;
     width:min(520px,40vw);
     margin:0;
     padding:18px 0;
@@ -657,7 +666,7 @@ section{padding:62px 0}
   .hero-scroll{
     position:absolute;
     right:calc(7vw + min(520px,40vw) / 2);
-    bottom:24px;
+    bottom:12px;
     padding:0;
     transform:translateX(50%);
   }
@@ -667,7 +676,7 @@ section{padding:62px 0}
   .section-head h2{font-size:2.85rem}
   .section-head .line{width:58px;margin-top:18px}
   #works{
-    padding-top:92px;
+    padding-top:72px;
     padding-bottom:74px;
     background:linear-gradient(180deg,#FDF8F6 0%,#FFFDFC 34%,#fff 100%);
   }
