@@ -117,7 +117,6 @@ function gallerySlotNumber(id) {
 
 const frames = (config.imageSlots || [])
   .filter((slot) => gallerySlotNumber(slot.id) && slot.publicPath && slot.currentPath && fs.existsSync(slot.currentPath))
-  .sort((a, b) => gallerySlotNumber(a.id) - gallerySlotNumber(b.id))
   .map((slot) => {
     const version = fs.statSync(slot.currentPath).mtimeMs;
     return `    <div class="frame reveal"><img src="${slot.publicPath}?v=${version}" alt="תמונת גלריה ${gallerySlotNumber(slot.id)}" loading="lazy"></div>`;
