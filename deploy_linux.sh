@@ -60,10 +60,6 @@ if [ -d "${WEB_ROOT}/.manager-site-backups" ]; then
   cp -a "${WEB_ROOT}/.manager-site-backups" "${PRESERVE_DIR}/.manager-site-backups"
 fi
 
-if [ -f "${WEB_ROOT}/index.html" ]; then
-  cp -p "${WEB_ROOT}/index.html" "${PRESERVE_DIR}/manager-site-live-index.html"
-fi
-
 echo "[INFO] Copying static site to ${WEB_ROOT}..."
 mkdir -p "${WEB_ROOT}"
 rm -rf "${WEB_ROOT:?}/"*
@@ -83,13 +79,14 @@ if [ -d "${PRESERVE_DIR}/.manager-site-backups" ]; then
   cp -a "${PRESERVE_DIR}/.manager-site-backups" "${WEB_ROOT}/.manager-site-backups"
 fi
 
-if [ -f "${PRESERVE_DIR}/manager-site-live-index.html" ]; then
-  echo "[INFO] Restoring Manager Site gallery markup..."
-  node - "${PRESERVE_DIR}/manager-site-live-index.html" "${WEB_ROOT}/index.html" <<'NODE'
+MANAGER_CONFIG="/root/Manager_Site/data/clients/miryam_zelig/client.config.json"
+if [ -f "${MANAGER_CONFIG}" ]; then
+  echo "[INFO] Rebuilding gallery markup from Manager Site..."
+  node - "${MANAGER_CONFIG}" "${WEB_ROOT}/index.html" <<'NODE'
 const fs = require("fs");
 
-const [livePath, nextPath] = process.argv.slice(2);
-const live = fs.readFileSync(livePath, "utf8");
+const [configPath, nextPath] = process.argv.slice(2);
+const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 const next = fs.readFileSync(nextPath, "utf8");
 
 function galleryRange(html) {
@@ -101,20 +98,33 @@ function galleryRange(html) {
   let match;
   while ((match = tag.exec(html))) {
     depth += match[0].startsWith("</") ? -1 : 1;
-    if (depth === 0) return [open.index, match.index + match[0].length];
+    if (depth === 0) return [open.index + open[0].length, match.index];
   }
   return null;
 }
 
-const liveRange = galleryRange(live);
 const nextRange = galleryRange(next);
-if (!liveRange || !nextRange) {
-  console.warn("[WARN] Manager Site gallery markup was not restored because a gallery container was not found.");
+if (!nextRange) {
+  console.warn("[WARN] Manager Site gallery markup was not rebuilt because a gallery container was not found.");
   process.exit(0);
 }
 
-const galleryMarkup = live.slice(liveRange[0], liveRange[1]);
-fs.writeFileSync(nextPath, `${next.slice(0, nextRange[0])}${galleryMarkup}${next.slice(nextRange[1])}`);
+function gallerySlotNumber(id) {
+  if (id === "gallery") return 1;
+  const match = String(id || "").match(/^gallery_(\d+)$/);
+  return match ? Number(match[1]) : 0;
+}
+
+const frames = (config.imageSlots || [])
+  .filter((slot) => gallerySlotNumber(slot.id) && slot.publicPath && slot.currentPath && fs.existsSync(slot.currentPath))
+  .sort((a, b) => gallerySlotNumber(a.id) - gallerySlotNumber(b.id))
+  .map((slot) => {
+    const version = fs.statSync(slot.currentPath).mtimeMs;
+    return `    <div class="frame reveal"><img src="${slot.publicPath}?v=${version}" alt="תמונת גלריה ${gallerySlotNumber(slot.id)}" loading="lazy"></div>`;
+  })
+  .join("\n");
+
+fs.writeFileSync(nextPath, `${next.slice(0, nextRange[0])}\n${frames}\n  ${next.slice(nextRange[1])}`);
 NODE
 fi
 
