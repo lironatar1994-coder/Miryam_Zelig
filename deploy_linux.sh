@@ -60,6 +60,10 @@ if [ -d "${WEB_ROOT}/.manager-site-backups" ]; then
   cp -a "${WEB_ROOT}/.manager-site-backups" "${PRESERVE_DIR}/.manager-site-backups"
 fi
 
+if [ -f "${WEB_ROOT}/index.html" ]; then
+  cp -p "${WEB_ROOT}/index.html" "${PRESERVE_DIR}/manager-site-live-index.html"
+fi
+
 echo "[INFO] Copying static site to ${WEB_ROOT}..."
 mkdir -p "${WEB_ROOT}"
 rm -rf "${WEB_ROOT:?}/"*
@@ -77,6 +81,41 @@ done
 
 if [ -d "${PRESERVE_DIR}/.manager-site-backups" ]; then
   cp -a "${PRESERVE_DIR}/.manager-site-backups" "${WEB_ROOT}/.manager-site-backups"
+fi
+
+if [ -f "${PRESERVE_DIR}/manager-site-live-index.html" ]; then
+  echo "[INFO] Restoring Manager Site gallery markup..."
+  node - "${PRESERVE_DIR}/manager-site-live-index.html" "${WEB_ROOT}/index.html" <<'NODE'
+const fs = require("fs");
+
+const [livePath, nextPath] = process.argv.slice(2);
+const live = fs.readFileSync(livePath, "utf8");
+const next = fs.readFileSync(nextPath, "utf8");
+
+function galleryRange(html) {
+  const open = /<div\s+class=["'][^"']*\bgallery\b[^"']*["'][^>]*>/i.exec(html);
+  if (!open || open.index == null) return null;
+  const tag = /<\/?div\b[^>]*>/gi;
+  tag.lastIndex = open.index + open[0].length;
+  let depth = 1;
+  let match;
+  while ((match = tag.exec(html))) {
+    depth += match[0].startsWith("</") ? -1 : 1;
+    if (depth === 0) return [open.index, match.index + match[0].length];
+  }
+  return null;
+}
+
+const liveRange = galleryRange(live);
+const nextRange = galleryRange(next);
+if (!liveRange || !nextRange) {
+  console.warn("[WARN] Manager Site gallery markup was not restored because a gallery container was not found.");
+  process.exit(0);
+}
+
+const galleryMarkup = live.slice(liveRange[0], liveRange[1]);
+fs.writeFileSync(nextPath, `${next.slice(0, nextRange[0])}${galleryMarkup}${next.slice(nextRange[1])}`);
+NODE
 fi
 
 echo "[INFO] Setting permissions..."
