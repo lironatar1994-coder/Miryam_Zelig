@@ -410,8 +410,7 @@ section{padding:62px 0}
 }
 
 @media(max-width:480px){
-  /* גובה אמיתי של המסך, עם רצפה שמונעת התנגשות בלוגו — כך שכפתור הפעולה נשאר מעל הקיפול */
-  .hero{min-height:max(600px,min(930px,100svh))}
+  .hero{min-height:930px}
   section[id]{scroll-margin-top:18px}
   header{
     position:absolute;top:0;right:0;left:0;z-index:50;
@@ -465,11 +464,6 @@ section{padding:62px 0}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
   .hero-scroll{font-size:1.1rem;padding-bottom:0;opacity:.72}
-  /* מסכים נמוכים: ההסטה כלפי מעלה מתנגשת בלוגו, והחץ ממילא מתחת לקיפול */
-  @media(max-height:640px){
-    .hero-content{transform:none}
-    .hero-scroll{display:none}
-  }
   #works{padding-top:40px}
   .faq-list{gap:8px;padding:0 24px}
   .faq{border-radius:12px;padding:0 15px;background:rgba(255,255,255,.78)}
