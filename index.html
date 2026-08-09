@@ -437,7 +437,9 @@ section{padding:62px 0}
   max-width:920px;margin:22px auto 0;padding-top:14px;border-top:1px solid rgba(217,168,160,.18);
   color:#B8948B;text-align:center;font-size:.72rem;line-height:1.8;letter-spacing:.04em;
 }
-.footer-bottom a{color:#D9A8A0;text-decoration:none}
+/* inline-block + padding מעלה את שטח ההקשה מ-17px לגובה תקני */
+.footer-bottom a{color:#D9A8A0;text-decoration:none;display:inline-block;padding:4px 2px}
+.footer-credit{margin-top:6px}
 
 /* ---------- אנימציות גילוי ---------- */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
@@ -1155,6 +1157,7 @@ section{padding:62px 0}
   <div class="footer-bottom">
     <div dir="ltr" lang="en">MIRYAM ZELIG · © 2026</div>
     <div>נשמח לעזור בכל קושי בשימוש באתר: <a href="tel:0546002942">054-600-2942</a></div>
+    <div class="footer-credit">האתר נבנה על ידי <a href="tel:0508611888"><span lang="en">LAwebs</span> · <span dir="ltr">050-861-1888</span></a></div>
   </div>
 </footer>
 
