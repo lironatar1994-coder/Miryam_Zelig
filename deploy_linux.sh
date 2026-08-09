@@ -49,6 +49,15 @@ git reset --hard origin/main
 
 echo "[INFO] Preserving Manager Site managed images..."
 PRESERVE_DIR="$(mktemp -d)"
+
+# The Manager Site can add gallery slots beyond the hardcoded list above
+# (img9, img10, ...). Preserve the whole live gallery directory, or the
+# WEB_ROOT wipe below deletes those uploads and the rebuilt markup 404s.
+if [ -d "${WEB_ROOT}/gallery" ]; then
+  mkdir -p "${PRESERVE_DIR}/gallery"
+  cp -a "${WEB_ROOT}/gallery/." "${PRESERVE_DIR}/gallery/"
+fi
+
 for asset in "${MANAGER_MANAGED_ASSETS[@]}"; do
   if [ -f "${WEB_ROOT}/${asset}" ]; then
     mkdir -p "${PRESERVE_DIR}/$(dirname "${asset}")"
@@ -68,6 +77,11 @@ cp -R gallery "${WEB_ROOT}/gallery"
 cp miryam.jpeg "${WEB_ROOT}/miryam.jpeg"
 
 echo "[INFO] Restoring Manager Site managed images..."
+if [ -d "${PRESERVE_DIR}/gallery" ]; then
+  mkdir -p "${WEB_ROOT}/gallery"
+  cp -a "${PRESERVE_DIR}/gallery/." "${WEB_ROOT}/gallery/"
+fi
+
 for asset in "${MANAGER_MANAGED_ASSETS[@]}"; do
   if [ -f "${PRESERVE_DIR}/${asset}" ]; then
     mkdir -p "${WEB_ROOT}/$(dirname "${asset}")"

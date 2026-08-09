@@ -13,8 +13,8 @@
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="מרים זליג · מאפרת מקצועית">
 <meta property="og:description" content="איפור כלות, ערב ואירועים ברמה הגבוהה ביותר — מגיעה עד אלייך, עם המוצרים הטובים בעולם.">
-<meta property="og:image" content="https://vee-app.co.il/Miryam_Zelig/gallery/img1.jpeg?v=1783262465709">
-<meta property="og:url" content="https://vee-app.co.il/Miryam_Zelig/">
+<meta property="og:image" content="https://miryamzelig.co.il/gallery/img1.jpeg?v=1783262465709">
+<meta property="og:url" content="https://miryamzelig.co.il/">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,8 +28,8 @@
   "@context": "https://schema.org",
   "@type": "BeautySalon",
   "name": "מרים זליג · מאפרת מקצועית",
-  "image": "https://vee-app.co.il/Miryam_Zelig/miryam.jpeg",
-  "url": "https://vee-app.co.il/Miryam_Zelig/",
+  "image": "https://miryamzelig.co.il/miryam.jpeg",
+  "url": "https://miryamzelig.co.il/",
   "telephone": "+972-54-600-2942",
   "sameAs": ["https://www.instagram.com/makeup.by.miryam/"],
   "areaServed": {"@type": "Country", "name": "Israel"},
@@ -150,10 +150,12 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
 }
 .hero-trust{
   position:relative;z-index:2;width:min(760px,calc(100% - 48px));margin:30px auto 18px;
-  display:grid;grid-template-columns:repeat(3,1fr);direction:ltr;color:var(--rose-deep);
+  display:grid;grid-template-columns:repeat(2,1fr);direction:ltr;color:var(--rose-deep);
 }
 .hero-trust div{min-height:72px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;text-align:center;padding:0 10px;border-right:1px solid rgba(180,118,110,.28)}
-.hero-trust div:last-child{border-right:none}
+.hero-trust div:nth-child(2n){border-right:none}
+.hero-trust div:nth-child(-n+2){border-bottom:1px solid rgba(180,118,110,.22);padding-bottom:16px}
+.hero-trust div:nth-child(n+3){padding-top:16px}
 .hero-trust svg{width:29px;height:29px;stroke:currentColor;fill:none;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 .hero-trust span{direction:rtl;font-size:.88rem;line-height:1.35;color:#5F473F}
 .hero-scroll{position:relative;z-index:2;text-align:center;padding-bottom:10px;font-size:1.4rem;line-height:1;color:var(--rose);animation:float 2.4s ease-in-out infinite}
@@ -201,6 +203,31 @@ section{padding:62px 0}
 .service .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 .service h3{font-size:1.22rem;margin-bottom:3px;color:#4A342E}
 .service p{font-size:.87rem;line-height:1.74;color:#5B443D}
+
+/* ---------- מתנה לכל לקוחה ---------- */
+.perk-band{padding:0 24px 4px;background:var(--porcelain)}
+.perk{
+  max-width:440px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;gap:15px;
+  text-align:center;padding:26px 22px 24px;border-radius:18px;
+  background:linear-gradient(180deg,#FFFCFB 0%,#FBEDE8 100%);
+  border:1px solid rgba(180,118,110,.3);
+  box-shadow:0 12px 30px rgba(51,34,30,.055),inset 0 0 0 1px rgba(255,255,255,.6);
+}
+.perk-ic{
+  flex:0 0 54px;width:54px;height:54px;border-radius:50%;
+  background:rgba(255,255,255,.88);border:1px solid rgba(180,118,110,.34);
+  display:flex;align-items:center;justify-content:center;color:var(--rose-deep);
+}
+.perk-ic svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.perk-eyebrow{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  font-size:.7rem;letter-spacing:.28em;color:#8F4F48;margin-bottom:9px;
+}
+.perk-eyebrow em{font-style:normal}
+.perk-eyebrow i{width:6px;height:6px;background:var(--rose);transform:rotate(45deg);display:block;flex:0 0 auto}
+.perk h3{font-size:1.5rem;line-height:1.25;color:#3F2924;margin-bottom:7px}
+.perk p{font-size:.9rem;line-height:1.7;color:#5B443D}
 
 /* ---------- גלריה ---------- */
 .gallery{
@@ -574,6 +601,23 @@ section{padding:62px 0}
   }
   .gallery .frame.reveal:not(.in) img{transform:none}
   .gallery .frame img{transition:transform .7s ease}
+
+  .hero-trust{grid-template-columns:repeat(4,1fr)}
+  .hero-trust div:nth-child(-n+2){border-bottom:none;padding-bottom:0}
+  .hero-trust div:nth-child(n+3){padding-top:0}
+  .hero-trust div:nth-child(2n){border-right:1px solid rgba(180,118,110,.28)}
+  .hero-trust div:last-child{border-right:none}
+
+  .perk-band{padding:0 24px 8px}
+  .perk{
+    max-width:560px;flex-direction:row;align-items:center;justify-content:center;
+    text-align:right;gap:24px;padding:26px 32px;border-radius:20px;
+  }
+  .perk-ic{flex:0 0 62px;width:62px;height:62px}
+  .perk-ic svg{width:31px;height:31px}
+  .perk-eyebrow{justify-content:flex-start;margin-bottom:8px}
+  .perk h3{font-size:1.72rem}
+  .perk p{font-size:.95rem}
 }
 
 @media(min-width:1100px){
@@ -816,6 +860,10 @@ section{padding:62px 0}
       <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 26S6 19.8 6 12.4C6 8.9 8.6 7 11.1 7c2 0 3.7 1.1 4.9 3 1.2-1.9 2.9-3 4.9-3C23.4 7 26 8.9 26 12.4 26 19.8 16 26 16 26Z"/></svg>
       <span>שירות אישי<br>ומקצועי</span>
     </div>
+    <div>
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.4 14h17.2v11.4a1.5 1.5 0 0 1-1.5 1.5H8.9a1.5 1.5 0 0 1-1.5-1.5V14Z"/><path d="M5.6 10.1h20.8V14H5.6z"/><path d="M16 10.1v16.8"/><path d="M16 10.1c-1-2.6-2.4-4.3-4.2-4.3a2.2 2.2 0 0 0 0 4.3H16Z"/><path d="M16 10.1c1-2.6 2.4-4.3 4.2-4.3a2.2 2.2 0 0 1 0 4.3H16Z"/></svg>
+      <span>ערכת טאצ'אפ<br>במתנה</span>
+    </div>
   </div>
   <div class="hero-scroll">⌄</div>
 </section>
@@ -884,6 +932,26 @@ section{padding:62px 0}
     <div class="service reveal">
       <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s8-8.1 8-15a8 8 0 1 0-16 0c0 6.9 8 15 8 15Z"/><circle cx="16" cy="13" r="2.8"/></svg></div>
       <div><h3>אני מגיעה אלייך</h3><p>בבית, במלון או במקום ההתארגנות — אני מגיעה עם כל מה שצריך, כדי שהיום שלך יתחיל רגוע, נעים ובלי ריצות מיותרות.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- מתנה לכל לקוחה -->
+<section class="perk-band" aria-labelledby="perk-title">
+  <div class="perk reveal">
+    <div class="perk-ic" aria-hidden="true">
+      <svg viewBox="0 0 32 32">
+        <path d="M6.5 13.5h19V26a1.6 1.6 0 0 1-1.6 1.6H8.1A1.6 1.6 0 0 1 6.5 26V13.5Z"/>
+        <path d="M4.4 9.2h23.2v4.3H4.4z"/>
+        <path d="M16 9.2v18.4"/>
+        <path d="M16 9.2c-1.1-2.9-2.6-4.8-4.6-4.8a2.4 2.4 0 0 0 0 4.8H16Z"/>
+        <path d="M16 9.2c1.1-2.9 2.6-4.8 4.6-4.8a2.4 2.4 0 0 1 0 4.8H16Z"/>
+      </svg>
+    </div>
+    <div class="perk-text">
+      <div class="perk-eyebrow"><i aria-hidden="true"></i><em data-manager-text="perk.eyebrow">מתנה</em></div>
+      <h3 id="perk-title" data-manager-text="perk.title">ערכת טאצ'אפ לכל לקוחה</h3>
+      <p data-manager-text="perk.body">גם לאיפור כלה וגם לאיפור ערב.</p>
     </div>
   </div>
 </section>
