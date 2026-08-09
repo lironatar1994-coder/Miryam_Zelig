@@ -37,7 +37,6 @@
 }
 </script>
 
-
 <style>
 :root{
   --porcelain:#FDF8F6;    /* הרקע שהיא אוהבת */
@@ -78,22 +77,6 @@ a{text-underline-offset:.22em;text-decoration-thickness:1px}
 
 section[id]{scroll-margin-top:112px}
 
-/* ---------- פס פעולה קבוע בנייד ---------- */
-.sticky-cta{
-  position:fixed;inset:auto 0 0 0;z-index:60;display:none;
-  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
-  background:rgba(253,248,246,.93);
-  border-top:1px solid rgba(180,118,110,.22);
-  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  transform:translateY(130%);
-  transition:transform .42s cubic-bezier(.22,1,.36,1);
-}
-.sticky-cta.show{transform:none}
-.sticky-cta .btn{width:100%;min-width:0;padding:14px 22px;font-size:1rem;gap:10px}
-.sticky-cta svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-@media(max-width:480px){.sticky-cta{display:block}}
-@media (prefers-reduced-motion:reduce){.sticky-cta{transition:none}}
-
 /* ---------- כותרת עליונה ---------- */
 header{
   position:fixed;top:0;right:0;left:0;z-index:50;
@@ -132,7 +115,7 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
 
 /* ---------- הירו ---------- */
 .hero-wrap{position:relative}
-.hero{padding:0;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--porcelain)}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--porcelain)}
 .hero-photo{position:absolute;inset:0 0 28% 0}
 .hero-photo img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
@@ -211,7 +194,7 @@ section{padding:62px 0}
   padding-bottom:50px;
   background:linear-gradient(180deg,#FDF8F6 0%,#FCF3F0 26%,var(--porcelain) 62%,var(--porcelain) 100%);
 }
-.perk-band + section{
+.about + section{
   background:linear-gradient(180deg,#FDF8F6 0%,#FFFDFC 52%,#FDF8F6 100%);
 }
 
@@ -232,25 +215,6 @@ section{padding:62px 0}
 .service .ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.45;stroke-linecap:round;stroke-linejoin:round}
 .service h3{font-size:1.22rem;margin-bottom:3px;color:#4A342E}
 .service p{font-size:.87rem;line-height:1.74;color:#5B443D}
-
-/* ---------- מתנה לכל לקוחה ---------- */
-.perk-band{padding:0 24px 4px;background:var(--porcelain)}
-.perk{
-  max-width:440px;margin:0 auto;
-  display:flex;flex-direction:column;align-items:center;gap:15px;
-  text-align:center;padding:26px 22px 24px;border-radius:18px;
-  background:linear-gradient(180deg,#FFFCFB 0%,#FBEDE8 100%);
-  border:1px solid rgba(180,118,110,.3);
-  box-shadow:0 12px 30px rgba(51,34,30,.055),inset 0 0 0 1px rgba(255,255,255,.6);
-}
-.perk-ic{
-  flex:0 0 54px;width:54px;height:54px;border-radius:50%;
-  background:rgba(255,255,255,.88);border:1px solid rgba(180,118,110,.34);
-  display:flex;align-items:center;justify-content:center;color:var(--rose-deep);
-}
-.perk-ic svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.perk h3{font-size:1.5rem;line-height:1.25;color:#3F2924;margin-bottom:7px}
-.perk p{font-size:.9rem;line-height:1.7;color:#5B443D}
 
 /* ---------- גלריה ---------- */
 .gallery{
@@ -278,34 +242,6 @@ section{padding:62px 0}
 }
 .insta-link svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;color:var(--rose-deep)}
 .insta-link:hover{transform:translateY(-1px);border-color:rgba(154,85,78,.54);color:var(--rose-deep);box-shadow:0 11px 24px rgba(51,34,30,.075),inset 0 0 0 1px rgba(255,255,255,.64)}
-
-/* ---------- תצוגה מוגדלת של עבודה ---------- */
-.frame{cursor:zoom-in}
-.lightbox{
-  position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:18px;padding:20px;
-  background:rgba(38,24,20,.94);
-  opacity:0;transition:opacity .3s ease;
-}
-.lightbox[hidden]{display:none}
-.lightbox.open{opacity:1}
-.lightbox img{
-  max-width:min(100%,620px);max-height:calc(100% - 108px);
-  object-fit:contain;border-radius:14px;
-  box-shadow:0 30px 70px rgba(0,0,0,.45);
-}
-.lb-bar{display:flex;align-items:center;gap:20px;color:#F8EDE8}
-.lb-bar button{
-  width:48px;height:48px;border-radius:50%;cursor:pointer;
-  border:1px solid rgba(248,237,232,.34);background:rgba(248,237,232,.08);
-  color:#F8EDE8;display:flex;align-items:center;justify-content:center;
-  transition:background .25s,border-color .25s;
-}
-.lb-bar button:hover{background:rgba(248,237,232,.18);border-color:rgba(248,237,232,.6)}
-.lb-bar svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.lb-count{font-size:.86rem;letter-spacing:.14em;min-width:56px;text-align:center;direction:ltr}
-.lb-close{position:absolute;top:16px;left:16px}
-.lightbox :focus-visible{outline:2px solid #F8EDE8;outline-offset:3px}
 
 /* ---------- קריאה לפעולה באמצע הדף ---------- */
 .cta-mid{
@@ -457,15 +393,9 @@ section{padding:62px 0}
 }
 
 @media(max-width:480px){
-  /* ההירו במובייל: דיוקן בתוך קשת — המוטיב של האתר — ואחריו טקסט על רקע נקי.
-     אין יותר שכבת עמעום מעל התמונה: היא זו שיצרה גם את הפס האפור מעל החולצה
-     השחורה וגם את כל בעיות הקריאוּת. התמונה נראית במלואה, הטקסט על פורצלן. */
-  .hero{
-    min-height:0;
-    padding:94px 0 22px;
-    justify-content:flex-start;
-    overflow:visible;
-  }
+  /* אין לגעת בגובה כל עוד עצירות ה-hero-fade הן באחוזים: הקטנת ההירו מקטינה
+     איתה את אזור העמעום, והטקסט נוחת בחזרה על התמונה. */
+  .hero{min-height:930px}
   section[id]{scroll-margin-top:18px}
   header{
     position:absolute;top:0;right:0;left:0;z-index:50;
@@ -487,24 +417,23 @@ section{padding:62px 0}
     text-shadow:0 1px 18px rgba(253,248,246,.96),0 0 1px rgba(255,255,255,.72);
   }
   .header-call,.menu-toggle{display:none}
-  .hero-photo{
-    position:relative;inset:auto;
-    width:calc(100% - 40px);margin:0 auto 24px;
-    height:clamp(250px,44svh,430px);
-    border-radius:200px 200px 22px 22px;
-    overflow:hidden;background:var(--powder);
-    border:1px solid rgba(180,118,110,.26);
-    box-shadow:0 20px 44px rgba(51,34,30,.17);
+  .hero-photo{inset:0 0 17%}
+  .hero-photo img{transform:translate(-4%,-8%) scale(1.08);filter:saturate(1.12) contrast(1.08) brightness(1.02) sepia(0)}
+  .hero-fade{
+    background:
+      radial-gradient(ellipse 105% 20% at 50% 61%,rgba(253,248,246,.64) 0%,rgba(253,248,246,.48) 36%,rgba(253,248,246,.18) 66%,rgba(253,248,246,0) 100%),
+      linear-gradient(to bottom,rgba(253,248,246,0) 0%,rgba(253,248,246,0) 42%,rgba(255,242,235,.34) 49%,rgba(253,248,246,.86) 57%,rgba(253,248,246,.98) 70%,var(--porcelain) 91%),
+      radial-gradient(ellipse 126% 32% at 50% 58%,rgba(255,242,235,.32) 0%,rgba(253,248,246,.24) 48%,rgba(253,248,246,0) 86%),
+      radial-gradient(ellipse 130% 70% at 50% 78%,rgba(253,248,246,0) 0%,rgba(253,248,246,.06) 74%,rgba(253,248,246,.18) 100%);
   }
-  .hero-photo img{
-    transform:none;object-position:center 16%;
-    filter:saturate(1.06) contrast(1.04) brightness(1.01) sepia(0);
-  }
-  .hero-fade{display:none}
-  .hero-content{transform:none}
+  .hero-content{transform:translateY(-130px)}
   .hero .eyebrow{
-    display:inline-block;font-size:.72rem;font-weight:500;color:#8F4F48;
-    margin-bottom:14px;background:transparent;transform:none;text-shadow:none;
+    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:500;color:#8F4F48;
+    margin-bottom:16px;background:transparent;transform:translateY(3px);
+    text-shadow:
+      0 1px 0 rgba(253,248,246,.86),
+      0 0 10px rgba(253,248,246,.76),
+      0 0 20px rgba(253,248,246,.48);
   }
   .hero h1{font-size:3.62rem;margin-bottom:10px}
   .hero-divider{margin-bottom:13px;color:#C27A72}
@@ -519,18 +448,7 @@ section{padding:62px 0}
   .hero-trust{width:calc(100% - 36px);margin:20px auto 8px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
-  /* הקשת והטקסט כבר מסמנים שהדף ממשיך, והפס הקבוע נותן את הפעולה */
-  .hero-scroll{display:none}
-  /* מסכים נמוכים: מכווצים את גוש הטקסט כדי שהקשת תישאר נדיבה */
-  @media(max-height:700px){
-    .hero{padding-top:86px}
-    .hero h1{font-size:2.95rem;margin-bottom:8px}
-    .hero p{font-size:.88rem;margin-bottom:14px}
-    .hero .eyebrow{margin-bottom:11px}
-    .hero-divider{margin-bottom:10px}
-    .hero-divider::before,.hero-divider::after{width:72px}
-    .hero-ctas{gap:10px}
-  }
+  .hero-scroll{font-size:1.1rem;padding-bottom:0;opacity:.72}
   #works{padding-top:40px}
   .faq-list{gap:8px;padding:0 24px}
   .faq{border-radius:12px;padding:0 15px;background:rgba(255,255,255,.78)}
@@ -668,16 +586,7 @@ section{padding:62px 0}
   .hero-trust div:nth-child(2n){border-right:1px solid rgba(180,118,110,.28)}
   .hero-trust div:last-child{border-right:none}
 
-  .perk-band{padding:0 24px 8px}
-  .perk{
-    max-width:560px;flex-direction:row;align-items:center;justify-content:center;
-    text-align:right;gap:24px;padding:26px 32px;border-radius:20px;
-  }
-  .perk-ic{flex:0 0 62px;width:62px;height:62px}
-  .perk-ic svg{width:31px;height:31px}
-  .perk h3{font-size:1.72rem}
-  .perk p{font-size:.95rem}
-}
+    }
 
 @media(min-width:1100px){
   header{
@@ -894,7 +803,7 @@ section{padding:62px 0}
 
 <!-- הירו -->
 <div class="hero-wrap">
-<section class="hero">
+<section class="hero" style="padding:0">
   <div class="hero-photo"><img src="/Miryam_Zelig/gallery/img1.jpeg?v=1783262465709" alt="איפור מקצועי - מרים זליג" fetchpriority="high"></div>
   <div class="hero-fade"></div>
   <div class="hero-content">
@@ -975,20 +884,6 @@ section{padding:62px 0}
   </div>
 </section>
 
-<!-- אודות -->
-<section class="about">
-  <div class="about-inner reveal">
-    <div class="about-photo"><img src="/Miryam_Zelig/miryam.jpeg" alt="מרים זליג" loading="lazy"></div>
-    <h2 data-manager-text="about.title">נעים להכיר, אני מרים</h2>
-    <p data-manager-text="about.body">מאפרת מקצועית עם ניסיון רב בתחום. אני מאמינה שכל אישה ראויה להרגיש את הגרסה הכי יפה של עצמה — עם תשומת לב לפרטים הקטנים ומוצרים איכותיים, אני יוצרת מראה מושלם שמחמיא לך באופן אישי.</p>
-    <div class="badges">
-      <span class="badge"><span aria-hidden="true">✦</span> תעודת מקצוע</span>
-      <span class="badge"><span aria-hidden="true">✦</span> מוצרי יוקרה בלבד</span>
-      <span class="badge"><span aria-hidden="true">✦</span> מגיעה עד אלייך</span>
-    </div>
-  </div>
-</section>
-
 <!-- קריאה לפעולה אחרי הגלריה — נקודת ההחלטה -->
 <div class="cta-mid reveal">
   <p>אהבת את הסגנון?</p>
@@ -1014,24 +909,9 @@ section{padding:62px 0}
       <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s8-8.1 8-15a8 8 0 1 0-16 0c0 6.9 8 15 8 15Z"/><circle cx="16" cy="13" r="2.8"/></svg></div>
       <div><h3>אני מגיעה אלייך</h3><p>בבית, במלון או במקום ההתארגנות — אני מגיעה עם כל מה שצריך, כדי שהיום שלך יתחיל רגוע, נעים ובלי ריצות מיותרות.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- מתנה לכל לקוחה -->
-<section class="perk-band" aria-labelledby="perk-title">
-  <div class="perk reveal">
-    <div class="perk-ic" aria-hidden="true">
-      <svg viewBox="0 0 32 32">
-        <path d="M6.5 13.5h19V26a1.6 1.6 0 0 1-1.6 1.6H8.1A1.6 1.6 0 0 1 6.5 26V13.5Z"/>
-        <path d="M4.4 9.2h23.2v4.3H4.4z"/>
-        <path d="M16 9.2v18.4"/>
-        <path d="M16 9.2c-1.1-2.9-2.6-4.8-4.6-4.8a2.4 2.4 0 0 0 0 4.8H16Z"/>
-        <path d="M16 9.2c1.1-2.9 2.6-4.8 4.6-4.8a2.4 2.4 0 0 1 0 4.8H16Z"/>
-      </svg>
-    </div>
-    <div class="perk-text">
-      <h3 id="perk-title" data-manager-text="perk.title">ערכת טאצ'אפ במתנה</h3>
-      <p data-manager-text="perk.body">לכל לקוחה, גם לאיפור כלה וגם לאיפור ערב.</p>
+    <div class="service reveal">
+      <div class="ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.4 14h17.2v11.4a1.5 1.5 0 0 1-1.5 1.5H8.9a1.5 1.5 0 0 1-1.5-1.5V14Z"/><path d="M5.6 10.1h20.8V14H5.6z"/><path d="M16 10.1v16.8"/><path d="M16 10.1c-1-2.6-2.4-4.3-4.2-4.3a2.2 2.2 0 0 0 0 4.3H16Z"/><path d="M16 10.1c1-2.6 2.4-4.3 4.2-4.3a2.2 2.2 0 0 1 0 4.3H16Z"/></svg></div>
+      <div><h3 data-manager-text="perk.title">ערכת טאצ'אפ במתנה</h3><p data-manager-text="perk.body">לכל לקוחה, גם לאיפור כלה וגם לאיפור ערב.</p></div>
     </div>
   </div>
 </section>
@@ -1063,6 +943,19 @@ section{padding:62px 0}
 </section>
 -->
 
+<!-- אודות -->
+<section class="about">
+  <div class="about-inner reveal">
+    <div class="about-photo"><img src="/Miryam_Zelig/miryam.jpeg" alt="מרים זליג" loading="lazy"></div>
+    <h2 data-manager-text="about.title">נעים להכיר, אני מרים</h2>
+    <p data-manager-text="about.body">מאפרת מקצועית עם ניסיון רב בתחום. אני מאמינה שכל אישה ראויה להרגיש את הגרסה הכי יפה של עצמה — עם תשומת לב לפרטים הקטנים ומוצרים איכותיים, אני יוצרת מראה מושלם שמחמיא לך באופן אישי.</p>
+    <div class="badges">
+      <span class="badge"><span aria-hidden="true">✦</span> תעודת מקצוע</span>
+      <span class="badge"><span aria-hidden="true">✦</span> מוצרי יוקרה בלבד</span>
+      <span class="badge"><span aria-hidden="true">✦</span> מגיעה עד אלייך</span>
+    </div>
+  </div>
+</section>
 
 <!-- שאלות נפוצות -->
 <section>
@@ -1107,31 +1000,6 @@ section{padding:62px 0}
 </section>
 
 </main>
-
-<!-- תצוגה מוגדלת של עבודה -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="תצוגה מוגדלת של עבודה" hidden>
-  <button class="lb-close" id="lbClose" type="button" aria-label="סגירת התצוגה">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
-  <img id="lbImg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
-  <div class="lb-bar">
-    <button id="lbPrev" type="button" aria-label="העבודה הקודמת">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
-    </button>
-    <span class="lb-count" id="lbCount"></span>
-    <button id="lbNext" type="button" aria-label="העבודה הבאה">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
-    </button>
-  </div>
-</div>
-
-<!-- פס פעולה קבוע — מופיע אחרי ההירו, נעלם מעל אזור יצירת הקשר -->
-<div class="sticky-cta" id="stickyCta">
-  <a class="btn btn-rose" href="https://wa.me/972546002942?text=היי%20מרים%20🙂%20אשמח%20לשמוע%20פרטים%20על%20איפור">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 20.5l1.2-4.2A8.2 8.2 0 1 1 8 19.6l-4.5.9Z"/><path d="M9 9.4c.2 1.9 1.9 3.6 3.8 3.8l.9-1.2 2 .8-.5 1.6c-2.9.3-5.7-2.5-6-5.4l1.6-.5.8 2-1.2.9Z"/></svg>
-    <span>לבדיקת זמינות בוואטסאפ</span>
-  </a>
-</div>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -1234,85 +1102,6 @@ if(ba){
     else if(k==='End'){setP(1);e.preventDefault()}
   });
   setP(.5);
-}
-
-/* פס פעולה קבוע — רק אחרי שההירו נגמר, ולא כשאזור יצירת הקשר על המסך */
-const sticky=document.getElementById('stickyCta');
-if(sticky){
-  const wrap=document.querySelector('.hero-wrap'),contact=document.getElementById('contact');
-  let ticking=false;
-  function syncSticky(){
-    ticking=false;
-    const pastHero=wrap.getBoundingClientRect().bottom<=0;
-    const cr=contact.getBoundingClientRect();
-    const contactOnScreen=cr.top<innerHeight&&cr.bottom>0;
-    sticky.classList.toggle('show',pastHero&&!contactOnScreen);
-  }
-  addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(syncSticky)}},{passive:true});
-  addEventListener('resize',syncSticky,{passive:true});
-  syncSticky();
-}
-
-/* תצוגה מוגדלת — הגלריה היא המוצר, צריך לאפשר להתקרב */
-const lb=document.getElementById('lightbox');
-if(lb){
-  const lbImg=document.getElementById('lbImg'),lbCount=document.getElementById('lbCount');
-  const PLACEHOLDER=lbImg.src;
-  const shots=()=>[...document.querySelectorAll('.gallery .frame img')];
-  let idx=0,opener=null;
-  /* הגלריה נבנית מחדש ע"י Manager Site בכל פריסה, לכן הנגישות מוזרקת בזמן ריצה */
-  document.querySelectorAll('.gallery .frame').forEach(f=>{
-    f.tabIndex=0;
-    f.setAttribute('role','button');
-    const im=f.querySelector('img');
-    f.setAttribute('aria-label','הגדלת '+((im&&im.alt)||'עבודה'));
-  });
-  function show(i){
-    const list=shots();
-    if(!list.length)return;
-    idx=(i+list.length)%list.length;
-    const src=list[idx];
-    lbImg.src=src.currentSrc||src.src;
-    lbImg.alt=src.alt||'';
-    lbCount.textContent=(idx+1)+' / '+list.length;
-  }
-  function open(i,from){
-    opener=from||null;
-    lb.hidden=false;
-    show(i);
-    requestAnimationFrame(()=>lb.classList.add('open'));
-    document.body.style.overflow='hidden';
-    document.getElementById('lbClose').focus();
-  }
-  function close(){
-    lb.classList.remove('open');
-    document.body.style.overflow='';
-    setTimeout(()=>{lb.hidden=true;lbImg.src=PLACEHOLDER},300);
-    if(opener)opener.focus();
-  }
-  document.querySelector('.gallery').addEventListener('click',e=>{
-    const frame=e.target.closest('.frame');
-    if(!frame)return;
-    open(shots().indexOf(frame.querySelector('img')),frame);
-  });
-  /* המסגרות הן div — מקלדת צריכה דרך פנימה */
-  document.querySelector('.gallery').addEventListener('keydown',e=>{
-    if(e.key!=='Enter'&&e.key!==' ')return;
-    const frame=e.target.closest('.frame');
-    if(!frame)return;
-    e.preventDefault();
-    open(shots().indexOf(frame.querySelector('img')),frame);
-  });
-  document.getElementById('lbClose').addEventListener('click',close);
-  document.getElementById('lbPrev').addEventListener('click',()=>show(idx-1));
-  document.getElementById('lbNext').addEventListener('click',()=>show(idx+1));
-  lb.addEventListener('click',e=>{if(e.target===lb)close()});
-  addEventListener('keydown',e=>{
-    if(lb.hidden)return;
-    if(e.key==='Escape'){close();e.preventDefault()}
-    else if(e.key==='ArrowRight'){show(idx-1);e.preventDefault()}
-    else if(e.key==='ArrowLeft'){show(idx+1);e.preventDefault()}
-  });
 }
 </script>
 </body>
