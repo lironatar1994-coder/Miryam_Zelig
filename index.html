@@ -434,16 +434,18 @@ section{padding:62px 0}
   .header-call,.menu-toggle{display:none}
   .hero-photo{inset:0 0 17%}
   .hero-photo img{transform:translate(-4%,-8%) scale(1.08);filter:saturate(1.12) contrast(1.08) brightness(1.02) sepia(0)}
+  /* שורת היתרונות הפכה ל-2x2 והעלתה את גוש הטקסט ב-92px (~10% מגובה ההירו),
+     לכן כל עצירות הטשטוש הוזזו ב-10% מעלה — היחס בין הטקסט לרקע נשמר כשהיה. */
   .hero-fade{
     background:
-      radial-gradient(ellipse 105% 20% at 50% 61%,rgba(253,248,246,.64) 0%,rgba(253,248,246,.48) 36%,rgba(253,248,246,.18) 66%,rgba(253,248,246,0) 100%),
-      linear-gradient(to bottom,rgba(253,248,246,0) 0%,rgba(253,248,246,0) 42%,rgba(255,242,235,.34) 49%,rgba(253,248,246,.86) 57%,rgba(253,248,246,.98) 70%,var(--porcelain) 91%),
-      radial-gradient(ellipse 126% 32% at 50% 58%,rgba(255,242,235,.32) 0%,rgba(253,248,246,.24) 48%,rgba(253,248,246,0) 86%),
-      radial-gradient(ellipse 130% 70% at 50% 78%,rgba(253,248,246,0) 0%,rgba(253,248,246,.06) 74%,rgba(253,248,246,.18) 100%);
+      radial-gradient(ellipse 105% 20% at 50% 44%,rgba(253,248,246,.64) 0%,rgba(253,248,246,.48) 36%,rgba(253,248,246,.18) 66%,rgba(253,248,246,0) 100%),
+      linear-gradient(to bottom,rgba(253,248,246,0) 0%,rgba(253,248,246,0) 25%,rgba(255,242,235,.36) 32%,rgba(253,248,246,.88) 40%,rgba(253,248,246,.98) 55%,var(--porcelain) 78%),
+      radial-gradient(ellipse 126% 32% at 50% 41%,rgba(255,242,235,.32) 0%,rgba(253,248,246,.24) 48%,rgba(253,248,246,0) 86%),
+      radial-gradient(ellipse 130% 70% at 50% 62%,rgba(253,248,246,0) 0%,rgba(253,248,246,.06) 74%,rgba(253,248,246,.18) 100%);
   }
   .hero-content{transform:translateY(-46px)}
   .hero .eyebrow{
-    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:500;color:#96534C;
+    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:500;color:#8F4F48;
     margin-bottom:16px;background:transparent;transform:translateY(3px);
     text-shadow:
       0 1px 0 rgba(253,248,246,.86),
