@@ -47,6 +47,16 @@ echo "[INFO] Pulling latest code..."
 git fetch origin main
 git reset --hard origin/main
 
+# The reset above may have just rewritten THIS file. Bash reads a script
+# incrementally by byte offset, so continuing here would execute the new
+# file from a stale offset and silently skip or garble the rest of the
+# deploy. Re-exec once so the remainder runs from stable source.
+if [ -z "${DEPLOY_REEXEC:-}" ]; then
+  echo "[INFO] Re-executing with updated deploy script..."
+  export DEPLOY_REEXEC=1
+  exec bash "$0" "$@"
+fi
+
 echo "[INFO] Preserving Manager Site managed images..."
 PRESERVE_DIR="$(mktemp -d)"
 
