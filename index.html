@@ -132,7 +132,7 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
 
 /* ---------- הירו ---------- */
 .hero-wrap{position:relative}
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--porcelain)}
+.hero{padding:0;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--porcelain)}
 .hero-photo{position:absolute;inset:0 0 28% 0}
 .hero-photo img{
   width:100%;height:100%;object-fit:cover;object-position:center top;
@@ -455,9 +455,15 @@ section{padding:62px 0}
 }
 
 @media(max-width:480px){
-  /* אין לגעת בגובה כל עוד עצירות ה-hero-fade הן באחוזים: הקטנת ההירו מקטינה
-     איתה את אזור העמעום, והטקסט נוחת בחזרה על התמונה. */
-  .hero{min-height:930px}
+  /* ההירו במובייל: דיוקן בתוך קשת — המוטיב של האתר — ואחריו טקסט על רקע נקי.
+     אין יותר שכבת עמעום מעל התמונה: היא זו שיצרה גם את הפס האפור מעל החולצה
+     השחורה וגם את כל בעיות הקריאוּת. התמונה נראית במלואה, הטקסט על פורצלן. */
+  .hero{
+    min-height:0;
+    padding:94px 0 22px;
+    justify-content:flex-start;
+    overflow:visible;
+  }
   section[id]{scroll-margin-top:18px}
   header{
     position:absolute;top:0;right:0;left:0;z-index:50;
@@ -479,29 +485,24 @@ section{padding:62px 0}
     text-shadow:0 1px 18px rgba(253,248,246,.96),0 0 1px rgba(255,255,255,.72);
   }
   .header-call,.menu-toggle{display:none}
-  .hero-photo{inset:0 0 17%}
-  .hero-photo img{transform:translate(-4%,-8%) scale(1.08);filter:saturate(1.12) contrast(1.08) brightness(1.02) sepia(0)}
-  /* העמעום נמדד בפיקסלים מלמטה ולא באחוזים, כך שאזור הקריאוּת נשאר בגובה קבוע
-     בכל גובה מסך — וההירו חופשי להתכווץ בלי שהטקסט ינחת על התמונה. */
-  .hero-fade{
-    background:
-      radial-gradient(ellipse 120% 240px at 50% calc(100% - 300px),rgba(255,242,235,.34) 0%,rgba(253,248,246,0) 72%),
-      linear-gradient(to top,
-        var(--porcelain) 0,
-        rgba(253,248,246,.99) 190px,
-        rgba(253,248,246,.95) 300px,
-        rgba(253,248,246,.80) 375px,
-        rgba(253,248,246,.34) 455px,
-        rgba(253,248,246,0) 560px);
+  .hero-photo{
+    position:relative;inset:auto;
+    width:calc(100% - 40px);margin:0 auto 24px;
+    height:clamp(250px,44svh,430px);
+    border-radius:200px 200px 22px 22px;
+    overflow:hidden;background:var(--powder);
+    border:1px solid rgba(180,118,110,.26);
+    box-shadow:0 20px 44px rgba(51,34,30,.17);
   }
+  .hero-photo img{
+    transform:none;object-position:center 16%;
+    filter:saturate(1.06) contrast(1.04) brightness(1.01) sepia(0);
+  }
+  .hero-fade{display:none}
   .hero-content{transform:none}
   .hero .eyebrow{
-    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:500;color:#8F4F48;
-    margin-bottom:16px;background:transparent;transform:translateY(3px);
-    text-shadow:
-      0 1px 0 rgba(253,248,246,.86),
-      0 0 10px rgba(253,248,246,.76),
-      0 0 20px rgba(253,248,246,.48);
+    display:inline-block;font-size:.72rem;font-weight:500;color:#8F4F48;
+    margin-bottom:14px;background:transparent;transform:none;text-shadow:none;
   }
   .hero h1{font-size:3.62rem;margin-bottom:10px}
   .hero-divider{margin-bottom:13px;color:#C27A72}
@@ -516,16 +517,17 @@ section{padding:62px 0}
   .hero-trust{width:calc(100% - 36px);margin:20px auto 8px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
-  .hero-scroll{font-size:1.1rem;padding-bottom:0;opacity:.72}
-  /* מסכים נמוכים: מכווצים את גוש הטקסט כדי שיישאר לתמונה מקום לנשום */
+  /* הקשת והטקסט כבר מסמנים שהדף ממשיך, והפס הקבוע נותן את הפעולה */
+  .hero-scroll{display:none}
+  /* מסכים נמוכים: מכווצים את גוש הטקסט כדי שהקשת תישאר נדיבה */
   @media(max-height:700px){
+    .hero{padding-top:86px}
     .hero h1{font-size:2.95rem;margin-bottom:8px}
     .hero p{font-size:.88rem;margin-bottom:14px}
-    .hero .eyebrow{margin-bottom:12px}
+    .hero .eyebrow{margin-bottom:11px}
     .hero-divider{margin-bottom:10px}
     .hero-divider::before,.hero-divider::after{width:72px}
     .hero-ctas{gap:10px}
-    .hero-scroll{display:none}
   }
   #works{padding-top:40px}
   .faq-list{gap:8px;padding:0 24px}
@@ -890,7 +892,7 @@ section{padding:62px 0}
 
 <!-- הירו -->
 <div class="hero-wrap">
-<section class="hero" style="padding:0">
+<section class="hero">
   <div class="hero-photo"><img src="/Miryam_Zelig/gallery/img1.jpeg?v=1783262465709" alt="איפור מקצועי - מרים זליג" fetchpriority="high"></div>
   <div class="hero-fade"></div>
   <div class="hero-content">
