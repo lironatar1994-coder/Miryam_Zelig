@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Heebo:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Heebo:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="/Miryam_Zelig/gallery/img1.jpeg?v=1783262465709" fetchpriority="high">
 
 <!-- נתונים מובנים לגוגל (עסק מקומי) -->
@@ -55,9 +55,28 @@ body{
   font-family:'Heebo',sans-serif;font-weight:300;
   background:var(--porcelain);color:var(--espresso);
   line-height:1.7;overflow-x:hidden;
+  caret-color:var(--rose-deep);
+  scrollbar-color:var(--rose-soft) var(--powder);
 }
 h1,h2,h3{font-family:'Bellefair',serif;font-weight:400;letter-spacing:.02em}
 img{display:block}
+::selection{background:var(--blush);color:var(--espresso)}
+a{text-underline-offset:.22em;text-decoration-thickness:1px}
+
+/* מיקוד מקלדת — נראה על כל פקד, גם מעל תמונה */
+:focus-visible{outline:2px solid var(--rose-deep);outline-offset:3px}
+.btn:focus-visible,.insta-link:focus-visible,.header-call:focus-visible{outline-offset:4px}
+
+/* דילוג לתוכן */
+.skip-link{
+  position:absolute;top:0;right:0;z-index:100;
+  transform:translateY(-120%);transition:transform .2s;
+  background:var(--espresso);color:#fff;text-decoration:none;
+  padding:12px 22px;border-radius:0 0 0 14px;font-size:.92rem;
+}
+.skip-link:focus-visible{transform:translateY(0)}
+
+section[id]{scroll-margin-top:112px}
 
 /* ---------- כותרת עליונה ---------- */
 header{
@@ -127,7 +146,7 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
 .btn svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .btn:active{transform:scale(.97)}
 .btn-rose{
-  background:linear-gradient(135deg,#C2857D,var(--rose-deep));
+  background:linear-gradient(135deg,#A9635B,#8A4F49);
   color:#fff;box-shadow:0 13px 28px rgba(158,95,88,.34);
 }
 .btn-inspire{
@@ -136,13 +155,6 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
   border:1px solid rgba(154,85,78,.46);
   box-shadow:0 13px 30px rgba(154,85,78,.13),inset 0 0 0 1px rgba(255,255,255,.66);
 }
-.btn-ghost{border:1px solid rgba(51,34,30,.26);color:var(--espresso);background:rgba(255,255,255,.72);backdrop-filter:blur(10px)}
-.hero-scroll-link{
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;
-  color:var(--espresso);font-size:.95rem;text-decoration:none;
-  border-bottom:1px solid rgba(51,34,30,.34);padding:1px 2px 4px;
-}
-.hero-scroll-link .arrow{font-size:.9rem;color:var(--rose-deep);transform:translateY(1px)}
 .hero-whatsapp-link{
   display:inline-flex;align-items:center;justify-content:center;
   color:#5F403A;text-decoration:none;font-size:.92rem;
@@ -220,12 +232,6 @@ section{padding:62px 0}
   display:flex;align-items:center;justify-content:center;color:var(--rose-deep);
 }
 .perk-ic svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
-.perk-eyebrow{
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  font-size:.7rem;letter-spacing:.28em;color:#8F4F48;margin-bottom:9px;
-}
-.perk-eyebrow em{font-style:normal}
-.perk-eyebrow i{width:6px;height:6px;background:var(--rose);transform:rotate(45deg);display:block;flex:0 0 auto}
 .perk h3{font-size:1.5rem;line-height:1.25;color:#3F2924;margin-bottom:7px}
 .perk p{font-size:.9rem;line-height:1.7;color:#5B443D}
 
@@ -273,7 +279,7 @@ section{padding:62px 0}
   position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/3.6;
   box-shadow:0 16px 40px rgba(51,34,30,.16);touch-action:pan-y;user-select:none;
 }
-.ba:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+.ba:focus-visible{outline:3px solid #fff;outline-offset:-3px;box-shadow:0 0 0 3px var(--rose-deep)}
 .ba-before,.ba-after{position:absolute;inset:0}
 .ba-before img,.ba-after img{width:100%;height:100%;object-fit:cover}
 .ba-before::after{
@@ -284,7 +290,7 @@ section{padding:62px 0}
 .ba-after{clip-path:inset(0 0 0 50%)}
 .ba-after::after{
   content:'אחרי';position:absolute;top:14px;left:14px;
-  background:var(--rose);color:#fff;font-size:.72rem;letter-spacing:.14em;
+  background:var(--rose-deep);color:#fff;font-size:.72rem;letter-spacing:.14em;
   padding:4px 12px;border-radius:999px;
 }
 .ba-handle{
@@ -301,23 +307,8 @@ section{padding:62px 0}
   display:flex;align-items:center;justify-content:center;font-size:1.1rem;
   box-shadow:0 4px 14px rgba(0,0,0,.22);
 }
-.ba-caption{text-align:center;font-size:.8rem;color:#8F7269;margin-top:16px;letter-spacing:.04em}
 
 /* ---------- המלצות ---------- */
-.quotes{display:flex;gap:14px;overflow-x:auto;padding:6px 24px 22px;scroll-snap-type:x mandatory;scrollbar-width:none}
-.quotes::-webkit-scrollbar{display:none}
-.quote{
-  flex:0 0 82%;max-width:330px;scroll-snap-align:center;
-  background:var(--white);border:1px solid rgba(180,118,110,.24);
-  border-radius:18px;padding:26px 22px 20px;position:relative;
-}
-.quote::before{
-  content:'”';font-family:'Bellefair',serif;font-size:3.4rem;line-height:0;
-  color:var(--rose-soft);position:absolute;top:34px;right:20px;
-}
-.quote p{font-size:.92rem;padding-right:34px;margin-bottom:14px;color:#4A342E}
-.quote .who{font-size:.78rem;letter-spacing:.08em;color:var(--rose-deep);padding-right:34px}
-.stars{color:var(--rose);letter-spacing:.18em;font-size:.8rem;padding-right:34px;margin-bottom:8px}
 
 /* ---------- אודות ---------- */
 .about{padding-top:48px;background:linear-gradient(180deg,#FDF8F6 0%,#FAEFEB 58%,#F9ECE8 78%,#FDF8F6 100%)}
@@ -347,7 +338,7 @@ section{padding:62px 0}
 }
 .faq summary{
   cursor:pointer;list-style:none;display:flex;justify-content:space-between;
-  align-items:center;gap:12px;padding:15px 0;font-size:.95rem;font-weight:400;color:#4A342E;
+  align-items:flex-start;gap:12px;padding:15px 0;font-size:.95rem;font-weight:400;color:#4A342E;
 }
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
@@ -363,16 +354,15 @@ section{padding:62px 0}
     linear-gradient(180deg,#FDF8F6 0%,#FFFDFC 18%,#FCF4F1 62%,#F8EDEA 100%);
   color:var(--espresso);text-align:center;padding:54px 26px 66px;
 }
-.contact .eyebrow{color:#A7655E;letter-spacing:.22em}
+.contact .eyebrow{color:#8F4F48;letter-spacing:.22em}
 .contact h2{font-size:2.55rem;margin-bottom:14px;color:var(--espresso)}
 .contact p{font-size:.95rem;line-height:1.85;color:#604840;max-width:310px;margin:0 auto 30px}
 .contact-ctas{display:flex;flex-direction:column;gap:12px;width:min(320px,100%);margin:0 auto;align-items:stretch}
 .contact .btn{width:100%;min-width:0}
 .btn-wa{
-  background:linear-gradient(135deg,#C9867E,var(--rose-deep));
+  background:linear-gradient(135deg,#A9635B,#8A4F49);
   color:#fff;box-shadow:0 14px 28px rgba(158,95,88,.28);
 }
-.btn-call2{border:1px solid rgba(51,34,30,.22);color:var(--espresso);background:rgba(255,255,255,.62)}
 
 .site-footer{
   background:
@@ -408,15 +398,21 @@ section{padding:62px 0}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-  .frame.reveal:not(.in) img{transform:none}
-  .frame img{transition:none}
-  .hero-scroll{animation:none}
+  /* גורף — כלל ספציפי יותר בהמשך הקובץ לא יחזיר אנימציה */
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
   html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .frame.reveal:not(.in) img{transform:none}
 }
 
 @media(max-width:480px){
-  .hero{min-height:930px}
+  /* גובה אמיתי של המסך, עם רצפה שמונעת התנגשות בלוגו — כך שכפתור הפעולה נשאר מעל הקיפול */
+  .hero{min-height:max(600px,min(930px,100svh))}
+  section[id]{scroll-margin-top:18px}
   header{
     position:absolute;top:0;right:0;left:0;z-index:50;
     min-height:0;height:0;padding:0;display:block;overflow:visible;
@@ -448,7 +444,7 @@ section{padding:62px 0}
   }
   .hero-content{transform:translateY(-46px)}
   .hero .eyebrow{
-    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:600;color:#96534C;
+    display:inline-block;padding:0 8px;font-size:.72rem;font-weight:500;color:#96534C;
     margin-bottom:16px;background:transparent;transform:translateY(3px);
     text-shadow:
       0 1px 0 rgba(253,248,246,.86),
@@ -464,13 +460,16 @@ section{padding:62px 0}
   .hero .btn svg{width:22px;height:22px}
   .hero .btn-inspire{width:min(70vw,330px);min-width:248px;padding:14px 26px;font-size:.98rem}
   .hero-whatsapp-link{margin-top:2px;font-size:.9rem}
-  .btn-rose{background:linear-gradient(135deg,#C27A72 0%,#A06059 100%);box-shadow:0 12px 26px rgba(158,95,88,.3)}
-  .hero-scroll-link{margin-top:4px;font-size:.95rem;font-weight:400;color:#3F2924;border-bottom-color:rgba(63,41,36,.42)}
-  .hero-scroll-link .arrow{color:#A06059}
+  .btn-rose{background:linear-gradient(135deg,#A9635B 0%,#8A4F49 100%);box-shadow:0 12px 26px rgba(158,95,88,.3)}
   .hero-trust{width:calc(100% - 36px);margin:20px auto 8px}
   .hero-trust span{font-size:.75rem}
   .hero-trust svg{width:25px;height:25px}
   .hero-scroll{font-size:1.1rem;padding-bottom:0;opacity:.72}
+  /* מסכים נמוכים: ההסטה כלפי מעלה מתנגשת בלוגו, והחץ ממילא מתחת לקיפול */
+  @media(max-height:640px){
+    .hero-content{transform:none}
+    .hero-scroll{display:none}
+  }
   #works{padding-top:40px}
   .faq-list{gap:8px;padding:0 24px}
   .faq{border-radius:12px;padding:0 15px;background:rgba(255,255,255,.78)}
@@ -615,7 +614,6 @@ section{padding:62px 0}
   }
   .perk-ic{flex:0 0 62px;width:62px;height:62px}
   .perk-ic svg{width:31px;height:31px}
-  .perk-eyebrow{justify-content:flex-start;margin-bottom:8px}
   .perk h3{font-size:1.72rem}
   .perk p{font-size:.95rem}
 }
@@ -816,17 +814,22 @@ section{padding:62px 0}
   .footer-meta{justify-items:start}
 }
 </style>
+<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
 
+<a class="skip-link" href="#main">דילוג לתוכן הראשי</a>
+
 <header id="header">
-  <div class="logo">MIRYAM <span>ZELIG</span></div>
+  <div class="logo" lang="en">MIRYAM <span>ZELIG</span></div>
   <a class="header-call" href="tel:0546002942" aria-label="התקשרות למרים זליג">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 4.4 9 3.5c.6-.2 1.2.1 1.5.6l1.1 2.6c.2.5.1 1-.3 1.4L10 9.4c.9 1.8 2.3 3.2 4.1 4.1l1.3-1.3c.4-.4.9-.5 1.4-.3l2.6 1.1c.6.2.8.9.6 1.5l-.9 2.4c-.2.5-.7.8-1.2.8C10.8 17.5 6.5 13.2 6.3 6c0-.6.3-1.1.8-1.3Z"/></svg>
     <span>התקשרי</span>
   </a>
   <a class="menu-toggle" href="#contact" aria-label="מעבר ליצירת קשר"><span></span><span></span><span></span></a>
 </header>
+
+<main id="main">
 
 <!-- הירו -->
 <section class="hero" style="padding:0">
@@ -865,7 +868,7 @@ section{padding:62px 0}
       <span>ערכת טאצ'אפ<br>במתנה</span>
     </div>
   </div>
-  <div class="hero-scroll">⌄</div>
+  <div class="hero-scroll" aria-hidden="true">⌄</div>
 </section>
 
 <!-- גלריה — קודם מראים את העבודות, אחר כך מספרים -->
@@ -874,7 +877,7 @@ section{padding:62px 0}
     <h2>השראה למראה שלך</h2>
     <div class="line"></div>
   </div>
-  <div class="gallery">
+  <div class="gallery" tabindex="0" role="group" aria-label="גלריית עבודות — ניתן לגלול הצידה">
     <div class="frame reveal"><img src="/Miryam_Zelig/gallery/img2.jpeg" alt="עבודת איפור של מרים זליג — מראה 1" loading="lazy"></div>
     <div class="frame reveal"><img src="/Miryam_Zelig/gallery/img3.jpeg" alt="עבודת איפור של מרים זליג — מראה 2" loading="lazy"></div>
     <div class="frame reveal"><img src="/Miryam_Zelig/gallery/img4.jpeg" alt="עבודת איפור של מרים זליג — מראה 3" loading="lazy"></div>
@@ -901,8 +904,8 @@ section{padding:62px 0}
   </div>
   <div class="ba-wrap reveal">
     <div class="ba" id="ba" tabindex="0" role="slider" aria-label="השוואת לפני ואחרי — גררי או השתמשי בחיצי המקלדת" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-      <div class="ba-before"><img src="/Miryam_Zelig/gallery/before-after-before.jpeg?v=1783059420" alt="לפני האיפור"></div>
-      <div class="ba-after" id="baAfter"><img src="/Miryam_Zelig/gallery/before-after-after.jpeg?v=1783059420" alt="אחרי האיפור"></div>
+      <div class="ba-before"><img src="/Miryam_Zelig/gallery/before-after-before.jpeg?v=1783059420" alt="לפני האיפור" loading="lazy" decoding="async"></div>
+      <div class="ba-after" id="baAfter"><img src="/Miryam_Zelig/gallery/before-after-after.jpeg?v=1783059420" alt="אחרי האיפור" loading="lazy" decoding="async"></div>
       <div class="ba-handle" id="baHandle"></div>
     </div>
   </div>
@@ -949,9 +952,8 @@ section{padding:62px 0}
       </svg>
     </div>
     <div class="perk-text">
-      <div class="perk-eyebrow"><i aria-hidden="true"></i><em data-manager-text="perk.eyebrow">מתנה</em></div>
-      <h3 id="perk-title" data-manager-text="perk.title">ערכת טאצ'אפ לכל לקוחה</h3>
-      <p data-manager-text="perk.body">גם לאיפור כלה וגם לאיפור ערב.</p>
+      <h3 id="perk-title" data-manager-text="perk.title">ערכת טאצ'אפ במתנה</h3>
+      <p data-manager-text="perk.body">לכל לקוחה, גם לאיפור כלה וגם לאיפור ערב.</p>
     </div>
   </div>
 </section>
@@ -990,9 +992,9 @@ section{padding:62px 0}
     <h2 data-manager-text="about.title">נעים להכיר, אני מרים</h2>
     <p data-manager-text="about.body">מאפרת מקצועית עם ניסיון רב בתחום. אני מאמינה שכל אישה ראויה להרגיש את הגרסה הכי יפה של עצמה — עם תשומת לב לפרטים הקטנים ומוצרים איכותיים, אני יוצרת מראה מושלם שמחמיא לך באופן אישי.</p>
     <div class="badges">
-      <span class="badge">✦ תעודת מקצוע</span>
-      <span class="badge">✦ מוצרי יוקרה בלבד</span>
-      <span class="badge">✦ מגיעה עד אלייך</span>
+      <span class="badge"><span aria-hidden="true">✦</span> תעודת מקצוע</span>
+      <span class="badge"><span aria-hidden="true">✦</span> מוצרי יוקרה בלבד</span>
+      <span class="badge"><span aria-hidden="true">✦</span> מגיעה עד אלייך</span>
     </div>
   </div>
 </section>
@@ -1039,10 +1041,12 @@ section{padding:62px 0}
   </div>
 </section>
 
+</main>
+
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <div class="footer-logo">MIRYAM <span>ZELIG</span></div>
+      <div class="footer-logo" lang="en">MIRYAM <span>ZELIG</span></div>
       <p>איפור כלות וערב עד אלייך, במראה נקי, יוקרתי ומדויק שנשאר יפה עד סוף היום.</p>
     </div>
 
@@ -1055,13 +1059,13 @@ section{padding:62px 0}
     </nav>
 
     <div class="footer-meta">
-      <a href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener">Instagram · @makeup.by.miryam</a>
+      <a href="https://www.instagram.com/makeup.by.miryam/" target="_blank" rel="noopener"><span lang="en">Instagram · @makeup.by.miryam</span></a>
       <a href="tel:0546002942">054-600-2942</a>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <div dir="ltr">MIRYAM ZELIG · © 2026</div>
+    <div dir="ltr" lang="en">MIRYAM ZELIG · © 2026</div>
     <div>נשמח לעזור בכל קושי בשימוש באתר: <a href="tel:0546002942">054-600-2942</a></div>
   </div>
 </footer>
@@ -1074,15 +1078,26 @@ function onScroll(){
 addEventListener('scroll',onScroll,{passive:true});
 onScroll();
 
-/* גילוי מדורג — אלמנטים שנכנסים למסך יחד מופיעים בקסקדה עדינה */
-const io=new IntersectionObserver(es=>{
-  es.filter(e=>e.isIntersecting).forEach((e,i)=>{
-    e.target.style.transitionDelay=(i*90)+'ms';
-    e.target.classList.add('in');
-    io.unobserve(e.target);
-  });
-},{threshold:.12});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* גילוי מדורג — אלמנטים שנכנסים למסך יחד מופיעים בקסקדה עדינה.
+   כמעט כל הדף מתחיל ב-opacity:0, לכן כל תקלה כאן חייבת להסתיים בחשיפה מלאה. */
+function revealAll(){
+  document.querySelectorAll('.reveal').forEach(el=>{el.style.transitionDelay='';el.classList.add('in')});
+}
+try{
+  const io=new IntersectionObserver(es=>{
+    es.filter(e=>e.isIntersecting).forEach((e,i)=>{
+      const d=Math.min(i,4)*90;
+      e.target.style.transitionDelay=d+'ms';
+      e.target.classList.add('in');
+      /* ניקוי ההשהיה, אחרת היא נדבקת גם למעברי hover של אותו אלמנט */
+      setTimeout(()=>{e.target.style.transitionDelay=''},d+900);
+      io.unobserve(e.target);
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}catch(err){
+  revealAll();
+}
 
 /* סליידר לפני/אחרי */
 const ba=document.getElementById('ba');
@@ -1091,33 +1106,43 @@ if(ba){
         handle=document.getElementById('baHandle');
   let pos=.5;
   function setP(p){
-    pos=Math.max(.06,Math.min(.94,p));
+    pos=Math.max(0,Math.min(1,p));
+    const pct=Math.round(pos*100);
     after.style.clipPath=`inset(0 0 0 ${pos*100}%)`;
     handle.style.left=(pos*100)+'%';
-    ba.setAttribute('aria-valuenow',Math.round(pos*100));
+    ba.setAttribute('aria-valuenow',pct);
+    /* המספר לבדו חסר משמעות — מקריאים כמה מתמונת האחרי נחשפת */
+    ba.setAttribute('aria-valuetext','חשיפת תמונת האחרי: '+(100-pct)+'%');
   }
   function setPos(clientX){
     const r=ba.getBoundingClientRect();
     setP((clientX-r.left)/r.width);
   }
-  let drag=false,startX=0,moved=false;
+  let drag=false;
+  const stop=()=>{drag=false};
   handle.addEventListener('pointerdown',e=>{
-    drag=true;moved=false;startX=e.clientX;
+    drag=true;
     handle.setPointerCapture(e.pointerId);
     e.preventDefault();
   });
-  handle.addEventListener('pointermove',e=>{
-    if(!drag)return;
-    if(!moved&&Math.abs(e.clientX-startX)<4)return;
-    moved=true;
+  handle.addEventListener('pointermove',e=>{if(drag)setPos(e.clientX)});
+  handle.addEventListener('pointerup',stop);
+  handle.addEventListener('pointercancel',stop);
+  handle.addEventListener('lostpointercapture',stop);
+  /* הקשה בכל מקום על התמונה מזיזה את המחוון, לא רק הידית הצרה */
+  ba.addEventListener('pointerdown',e=>{
+    if(e.target===handle||handle.contains(e.target))return;
     setPos(e.clientX);
+    ba.focus();
   });
-  handle.addEventListener('pointerup',()=>{drag=false;moved=false});
-  handle.addEventListener('pointercancel',()=>{drag=false;moved=false});
   ba.addEventListener('keydown',e=>{
-    if(e.key==='ArrowLeft'){setP(pos-.05);e.preventDefault()}
-    if(e.key==='ArrowRight'){setP(pos+.05);e.preventDefault()}
+    const k=e.key;
+    if(k==='ArrowLeft'){setP(pos-.05);e.preventDefault()}
+    else if(k==='ArrowRight'){setP(pos+.05);e.preventDefault()}
+    else if(k==='Home'){setP(0);e.preventDefault()}
+    else if(k==='End'){setP(1);e.preventDefault()}
   });
+  setP(.5);
 }
 </script>
 </body>
