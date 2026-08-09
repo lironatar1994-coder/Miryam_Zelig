@@ -115,6 +115,7 @@ header.scrolled{background:rgba(253,248,246,.94);border-color:rgba(180,118,110,.
 .menu-toggle span{width:30px;height:2px;background:currentColor;border-radius:999px}
 
 /* ---------- הירו ---------- */
+.hero-wrap{position:relative}
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;background:var(--porcelain)}
 .hero-photo{position:absolute;inset:0 0 28% 0}
 .hero-photo img{
@@ -410,6 +411,8 @@ section{padding:62px 0}
 }
 
 @media(max-width:480px){
+  /* אין לגעת בגובה כל עוד עצירות ה-hero-fade הן באחוזים: הקטנת ההירו מקטינה
+     איתה את אזור העמעום, והטקסט נוחת בחזרה על התמונה. */
   .hero{min-height:930px}
   section[id]{scroll-margin-top:18px}
   header{
@@ -434,14 +437,12 @@ section{padding:62px 0}
   .header-call,.menu-toggle{display:none}
   .hero-photo{inset:0 0 17%}
   .hero-photo img{transform:translate(-4%,-8%) scale(1.08);filter:saturate(1.12) contrast(1.08) brightness(1.02) sepia(0)}
-  /* שורת היתרונות הפכה ל-2x2 והעלתה את גוש הטקסט ב-92px (~10% מגובה ההירו),
-     לכן כל עצירות הטשטוש הוזזו ב-10% מעלה — היחס בין הטקסט לרקע נשמר כשהיה. */
   .hero-fade{
     background:
-      radial-gradient(ellipse 105% 20% at 50% 44%,rgba(253,248,246,.64) 0%,rgba(253,248,246,.48) 36%,rgba(253,248,246,.18) 66%,rgba(253,248,246,0) 100%),
-      linear-gradient(to bottom,rgba(253,248,246,0) 0%,rgba(253,248,246,0) 25%,rgba(255,242,235,.36) 32%,rgba(253,248,246,.88) 40%,rgba(253,248,246,.98) 55%,var(--porcelain) 78%),
-      radial-gradient(ellipse 126% 32% at 50% 41%,rgba(255,242,235,.32) 0%,rgba(253,248,246,.24) 48%,rgba(253,248,246,0) 86%),
-      radial-gradient(ellipse 130% 70% at 50% 62%,rgba(253,248,246,0) 0%,rgba(253,248,246,.06) 74%,rgba(253,248,246,.18) 100%);
+      radial-gradient(ellipse 105% 20% at 50% 61%,rgba(253,248,246,.64) 0%,rgba(253,248,246,.48) 36%,rgba(253,248,246,.18) 66%,rgba(253,248,246,0) 100%),
+      linear-gradient(to bottom,rgba(253,248,246,0) 0%,rgba(253,248,246,0) 42%,rgba(255,242,235,.34) 49%,rgba(253,248,246,.86) 57%,rgba(253,248,246,.98) 70%,var(--porcelain) 91%),
+      radial-gradient(ellipse 126% 32% at 50% 58%,rgba(255,242,235,.32) 0%,rgba(253,248,246,.24) 48%,rgba(253,248,246,0) 86%),
+      radial-gradient(ellipse 130% 70% at 50% 78%,rgba(253,248,246,0) 0%,rgba(253,248,246,.06) 74%,rgba(253,248,246,.18) 100%);
   }
   .hero-content{transform:translateY(-46px)}
   .hero .eyebrow{
@@ -828,6 +829,7 @@ section{padding:62px 0}
 <main id="main">
 
 <!-- הירו -->
+<div class="hero-wrap">
 <section class="hero" style="padding:0">
   <div class="hero-photo"><img src="/Miryam_Zelig/gallery/img1.jpeg?v=1783262465709" alt="איפור מקצועי - מרים זליג" fetchpriority="high"></div>
   <div class="hero-fade"></div>
@@ -846,26 +848,28 @@ section{padding:62px 0}
       </a>
     </div>
   </div>
-  <div class="hero-trust" aria-label="יתרונות השירות">
-    <div>
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m5 24 2-12 6 6 3-10 3 10 6-6 2 12H5Z"/><path d="M7 27h18"/></svg>
-      <span>מוצרים איכותיים<br>מהטובים בעולם</span>
-    </div>
-    <div>
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s8-8.1 8-15a8 8 0 1 0-16 0c0 6.9 8 15 8 15Z"/><circle cx="16" cy="13" r="2.8"/></svg>
-      <span>הגעה עד אלייך</span>
-    </div>
-    <div>
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 26S6 19.8 6 12.4C6 8.9 8.6 7 11.1 7c2 0 3.7 1.1 4.9 3 1.2-1.9 2.9-3 4.9-3C23.4 7 26 8.9 26 12.4 26 19.8 16 26 16 26Z"/></svg>
-      <span>שירות אישי<br>ומקצועי</span>
-    </div>
-    <div>
-      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.4 14h17.2v11.4a1.5 1.5 0 0 1-1.5 1.5H8.9a1.5 1.5 0 0 1-1.5-1.5V14Z"/><path d="M5.6 10.1h20.8V14H5.6z"/><path d="M16 10.1v16.8"/><path d="M16 10.1c-1-2.6-2.4-4.3-4.2-4.3a2.2 2.2 0 0 0 0 4.3H16Z"/><path d="M16 10.1c1-2.6 2.4-4.3 4.2-4.3a2.2 2.2 0 0 1 0 4.3H16Z"/></svg>
-      <span>ערכת טאצ'אפ<br>במתנה</span>
-    </div>
-  </div>
   <div class="hero-scroll" aria-hidden="true">⌄</div>
 </section>
+
+<div class="hero-trust" role="list" aria-label="יתרונות השירות">
+  <div role="listitem">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m5 24 2-12 6 6 3-10 3 10 6-6 2 12H5Z"/><path d="M7 27h18"/></svg>
+    <span>מוצרים איכותיים<br>מהטובים בעולם</span>
+  </div>
+  <div role="listitem">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s8-8.1 8-15a8 8 0 1 0-16 0c0 6.9 8 15 8 15Z"/><circle cx="16" cy="13" r="2.8"/></svg>
+    <span>הגעה עד אלייך</span>
+  </div>
+  <div role="listitem">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 26S6 19.8 6 12.4C6 8.9 8.6 7 11.1 7c2 0 3.7 1.1 4.9 3 1.2-1.9 2.9-3 4.9-3C23.4 7 26 8.9 26 12.4 26 19.8 16 26 16 26Z"/></svg>
+    <span>שירות אישי<br>ומקצועי</span>
+  </div>
+  <div role="listitem">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7.4 14h17.2v11.4a1.5 1.5 0 0 1-1.5 1.5H8.9a1.5 1.5 0 0 1-1.5-1.5V14Z"/><path d="M5.6 10.1h20.8V14H5.6z"/><path d="M16 10.1v16.8"/><path d="M16 10.1c-1-2.6-2.4-4.3-4.2-4.3a2.2 2.2 0 0 0 0 4.3H16Z"/><path d="M16 10.1c1-2.6 2.4-4.3 4.2-4.3a2.2 2.2 0 0 1 0 4.3H16Z"/></svg>
+    <span>ערכת טאצ'אפ<br>במתנה</span>
+  </div>
+</div>
+</div>
 
 <!-- גלריה — קודם מראים את העבודות, אחר כך מספרים -->
 <section id="works">
