@@ -1103,6 +1103,25 @@ if(ba){
   });
   setP(.5);
 }
+
+/* Privacy-bounded cross-site comparison signal. The secret remains in Nginx. */
+(()=>{
+  const randomId=()=>crypto.randomUUID?.()||`${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}_${Math.random().toString(36).slice(2)}`;
+  const visitorId=()=>{
+    try{
+      const key='miryam.monitor.visitor',now=Date.now(),stored=JSON.parse(localStorage.getItem(key)||'null');
+      if(stored?.id&&Number(stored.expiresAt)>now)return stored.id;
+      const id=randomId();localStorage.setItem(key,JSON.stringify({id,expiresAt:now+2592000000}));return id;
+    }catch{return randomId()}
+  };
+  const sessionId=()=>{
+    try{const key='miryam.monitor.session',stored=sessionStorage.getItem(key);if(stored)return stored;const id=randomId();sessionStorage.setItem(key,id);return id}catch{return randomId()}
+  };
+  fetch('/.well-known/vee-visitor-signal',{
+    method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({event_id:randomId(),visitor_id:visitorId(),session_id:sessionId(),path:location.pathname,webdriver:navigator.webdriver===true})
+  }).catch(()=>{});
+})();
 </script>
 </body>
 </html>
