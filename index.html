@@ -1121,6 +1121,47 @@ if(ba){
     method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json'},
     body:JSON.stringify({event_id:randomId(),visitor_id:visitorId(),session_id:sessionId(),path:location.pathname,webdriver:navigator.webdriver===true})
   }).catch(()=>{});
+
+  /* אזורים חמים: עומק גלילה ואזורים שנלחצו. נשלח פעם אחת בעזיבת הדף,
+     בנפרד מאות הצפייה, כדי שביקור אחד לא ייספר פעמיים. */
+  const zoneOf=(el)=>{
+    const named=el.closest('[data-zone]');
+    if(named)return named.getAttribute('data-zone').slice(0,64);
+    const map=[['.sticky-cta','פס וואטסאפ קבוע'],['.hero-ctas .btn','כפתור ראשי בהירו'],
+      ['.hero-whatsapp-link','קישור וואטסאפ בהירו'],['.hero-trust','שורת יתרונות'],
+      ['.frame','תמונת גלריה'],['.insta-link','אינסטגרם'],['.ba','לפני ואחרי'],
+      ['.cta-mid .btn','קריאה לפעולה אמצע'],['.service','כרטיס שירות'],
+      ['.faq summary','שאלה נפוצה'],['.contact .btn','וואטסאפ ביצירת קשר'],
+      ['.about','אודות'],['.site-footer a','קישור בתחתית'],['.logo','לוגו']];
+    for(const [sel,label] of map){ if(el.closest(sel))return label; }
+    return '';
+  };
+  let maxDepth=0,started=Date.now(),sent=false;
+  const zones=new Map();
+  const depth=()=>{
+    const h=Math.max(0,document.documentElement.scrollHeight-innerHeight);
+    return h?Math.min(100,Math.round(scrollY/h*100)):100;
+  };
+  const trackDepth=()=>{const d=depth();if(d>maxDepth)maxDepth=d};
+  trackDepth();
+  addEventListener('scroll',trackDepth,{passive:true});
+  addEventListener('click',(e)=>{
+    const z=e.target instanceof Element?zoneOf(e.target):'';
+    if(z)zones.set(z,(zones.get(z)||0)+1);
+  },{passive:true,capture:true});
+  const flush=()=>{
+    if(sent)return;sent=true;
+    try{
+      navigator.sendBeacon('/.well-known/vee-visitor-signal',new Blob([JSON.stringify({
+        kind:'engagement',event_id:randomId(),visitor_id:visitorId(),session_id:sessionId(),
+        path:location.pathname,webdriver:navigator.webdriver===true,
+        scroll_depth:maxDepth,dwell_ms:Date.now()-started,viewport_width:innerWidth,
+        zones:[...zones].map(([zone,taps])=>({zone,taps}))
+      })],{type:'application/json'}));
+    }catch{}
+  };
+  addEventListener('pagehide',flush);
+  addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
 })();
 </script>
 </body>
