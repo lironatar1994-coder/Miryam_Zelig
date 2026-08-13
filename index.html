@@ -1102,64 +1102,108 @@ if(ba){
   setP(.5);
 }
 
-/* Privacy-bounded cross-site comparison signal. The secret remains in Nginx. */
+/* Privacy-bounded first-party engagement signal. The secret remains in Nginx.
+   It records coarse viewport cells and named page zones, never page content. */
 (()=>{
   const randomId=()=>crypto.randomUUID?.()||`${Date.now().toString(36)}_${Math.random().toString(36).slice(2)}_${Math.random().toString(36).slice(2)}`;
-  const visitorId=()=>{
+  const storedId=(storage,key,expires)=>{
     try{
-      const key='miryam.monitor.visitor',now=Date.now(),stored=JSON.parse(localStorage.getItem(key)||'null');
-      if(stored?.id&&Number(stored.expiresAt)>now)return stored.id;
-      const id=randomId();localStorage.setItem(key,JSON.stringify({id,expiresAt:now+2592000000}));return id;
+      const now=Date.now(),raw=storage.getItem(key);
+      let stored;
+      try{stored=JSON.parse(raw||'null')}catch{stored=raw?{id:raw}:null}
+      if(stored?.id&&(!stored.expiresAt||Number(stored.expiresAt)>now))return stored.id;
+      const id=randomId();storage.setItem(key,JSON.stringify({id,expiresAt:expires?now+expires:null}));return id;
     }catch{return randomId()}
   };
-  const sessionId=()=>{
-    try{const key='miryam.monitor.session',stored=sessionStorage.getItem(key);if(stored)return stored;const id=randomId();sessionStorage.setItem(key,id);return id}catch{return randomId()}
+  const visitorId=storedId(localStorage,'miryam.monitor.visitor',2592000000);
+  const sessionId=storedId(sessionStorage,'miryam.monitor.session',0);
+  const endpoint=location.pathname.toLowerCase().startsWith('/miryam_zelig')
+    ? '/Miryam_Zelig/.well-known/vee-visitor-signal'
+    : '/.well-known/vee-visitor-signal';
+  const base=()=>({event_id:randomId(),visitor_id:visitorId,session_id:sessionId,path:location.pathname,webdriver:navigator.webdriver===true});
+  const send=(payload,useBeacon=false)=>{
+    const body=JSON.stringify(payload);
+    if(useBeacon&&navigator.sendBeacon){
+      try{if(navigator.sendBeacon(endpoint,new Blob([body],{type:'application/json'})))return}catch{}
+    }
+    fetch(endpoint,{method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json'},body}).catch(()=>{});
   };
-  fetch('/.well-known/vee-visitor-signal',{
-    method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({event_id:randomId(),visitor_id:visitorId(),session_id:sessionId(),path:location.pathname,webdriver:navigator.webdriver===true})
-  }).catch(()=>{});
+  send(base());
 
-  /* אזורים חמים: עומק גלילה ואזורים שנלחצו. נשלח פעם אחת בעזיבת הדף,
-     בנפרד מאות הצפייה, כדי שביקור אחד לא ייספר פעמיים. */
-  const zoneOf=(el)=>{
-    const named=el.closest('[data-zone]');
-    if(named)return named.getAttribute('data-zone').slice(0,64);
-    const map=[['.sticky-cta','פס וואטסאפ קבוע'],['.hero-ctas .btn','כפתור ראשי בהירו'],
-      ['.hero-whatsapp-link','קישור וואטסאפ בהירו'],['.hero-trust','שורת יתרונות'],
-      ['.frame','תמונת גלריה'],['.insta-link','אינסטגרם'],['.ba','לפני ואחרי'],
-      ['.cta-mid .btn','קריאה לפעולה אמצע'],['.service','כרטיס שירות'],
-      ['.faq summary','שאלה נפוצה'],['.contact .btn','וואטסאפ ביצירת קשר'],
-      ['.about','אודות'],['.site-footer a','קישור בתחתית'],['.logo','לוגו']];
-    for(const [sel,label] of map){ if(el.closest(sel))return label; }
-    return '';
+  const zoneTargets=[
+    ['#header','site-header'],['.hero','hero'],['.hero-whatsapp-link','hero-whatsapp'],
+    ['#works','gallery'],['#works .insta-link','gallery-instagram'],['#before-after','before-after'],
+    ['.cta-mid','mid-cta'],['.cta-mid a[href*="wa.me"]','mid-whatsapp'],['#services','services'],
+    ['.about','about'],['.faq-list','faq'],['#contact','contact'],
+    ['#contact a[href*="wa.me"]','contact-whatsapp'],['.site-footer','footer']
+  ];
+  zoneTargets.forEach(([selector,zone])=>{
+    const element=document.querySelector(selector);
+    if(element){element.dataset.analyticsZone=zone;element.dataset.analyticsView=zone}
+  });
+
+  const startedAt=Date.now(),zoneTaps=new Map(),heatCells=new Map(),visible=new Map(),zoneViews=new Map();
+  let maxScroll=0,flushed=false;
+  const viewportClass=()=>innerWidth<640?'mobile':innerWidth<1024?'tablet':'desktop';
+  const updateScroll=()=>{
+    const root=document.documentElement;
+    const available=Math.max(1,root.scrollHeight-innerHeight);
+    maxScroll=Math.max(maxScroll,Math.min(100,Math.round(scrollY/available*100)));
   };
-  let maxDepth=0,started=Date.now(),sent=false;
-  const zones=new Map();
-  const depth=()=>{
-    const h=Math.max(0,document.documentElement.scrollHeight-innerHeight);
-    return h?Math.min(100,Math.round(scrollY/h*100)):100;
+  addEventListener('scroll',updateScroll,{passive:true});
+  updateScroll();
+
+  document.addEventListener('click',event=>{
+    const zone=event.target.closest?.('[data-analytics-zone]')?.dataset.analyticsZone;
+    if(zone)zoneTaps.set(zone,(zoneTaps.get(zone)||0)+1);
+    const x=Math.max(0,Math.min(11,Math.floor(event.clientX/Math.max(1,innerWidth)*12)));
+    const y=Math.max(0,Math.min(11,Math.floor(event.clientY/Math.max(1,innerHeight)*12)));
+    const key=`${x}:${y}`;
+    heatCells.set(key,(heatCells.get(key)||0)+1);
+  },{passive:true});
+
+  const finishView=(zone,now=Date.now())=>{
+    const since=visible.get(zone);
+    if(!since)return;
+    visible.delete(zone);
+    const row=zoneViews.get(zone)||{views:0,dwell_ms:0};
+    row.dwell_ms+=Math.max(0,now-since);
+    zoneViews.set(zone,row);
   };
-  const trackDepth=()=>{const d=depth();if(d>maxDepth)maxDepth=d};
-  trackDepth();
-  addEventListener('scroll',trackDepth,{passive:true});
-  addEventListener('click',(e)=>{
-    const z=e.target instanceof Element?zoneOf(e.target):'';
-    if(z)zones.set(z,(zones.get(z)||0)+1);
-  },{passive:true,capture:true});
+  let observer;
+  if('IntersectionObserver'in window){
+    observer=new IntersectionObserver(entries=>{
+      const now=Date.now();
+      entries.forEach(entry=>{
+        const zone=entry.target.dataset.analyticsView;
+        if(entry.isIntersecting){
+          if(!visible.has(zone)){
+            visible.set(zone,now);
+            const row=zoneViews.get(zone)||{views:0,dwell_ms:0};
+            row.views+=1;zoneViews.set(zone,row);
+          }
+        }else finishView(zone,now);
+      });
+    },{threshold:.25});
+    document.querySelectorAll('[data-analytics-view]').forEach(element=>observer.observe(element));
+  }
+
   const flush=()=>{
-    if(sent)return;sent=true;
-    try{
-      navigator.sendBeacon('/.well-known/vee-visitor-signal',new Blob([JSON.stringify({
-        kind:'engagement',event_id:randomId(),visitor_id:visitorId(),session_id:sessionId(),
-        path:location.pathname,webdriver:navigator.webdriver===true,
-        scroll_depth:maxDepth,dwell_ms:Date.now()-started,viewport_width:innerWidth,
-        zones:[...zones].map(([zone,taps])=>({zone,taps}))
-      })],{type:'application/json'}));
-    }catch{}
+    if(flushed)return;
+    flushed=true;updateScroll();
+    const now=Date.now();
+    [...visible.keys()].forEach(zone=>finishView(zone,now));
+    observer?.disconnect();
+    send({
+      ...base(),kind:'engagement',scroll_depth:maxScroll,dwell_ms:Math.max(0,now-startedAt),
+      viewport_width:innerWidth,viewport_class:viewportClass(),
+      zones:[...zoneTaps].slice(0,30).map(([zone,taps])=>({zone,taps})),
+      views:[...zoneViews].slice(0,24).map(([zone,row])=>({zone,views:row.views,dwell_ms:row.dwell_ms})),
+      heatmap:[...heatCells].slice(0,60).map(([cell,taps])=>{const [x,y]=cell.split(':').map(Number);return{x,y,taps}})
+    },true);
   };
-  addEventListener('pagehide',flush);
-  addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
+  addEventListener('pagehide',flush,{once:true});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')flush()});
 })();
 </script>
 </body>
