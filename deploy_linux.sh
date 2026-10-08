@@ -85,6 +85,8 @@ rm -rf "${WEB_ROOT:?}/"*
 cp index.html "${WEB_ROOT}/index.html"
 cp -R gallery "${WEB_ROOT}/gallery"
 cp miryam.jpeg "${WEB_ROOT}/miryam.jpeg"
+cp -R icons "${WEB_ROOT}/icons"
+cp favicon.ico "${WEB_ROOT}/favicon.ico"
 for discovery in robots.txt sitemap.xml google*.html; do
   if [ -f "$discovery" ]; then cp "$discovery" "${WEB_ROOT}/$discovery"; fi
 done

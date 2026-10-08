@@ -54,7 +54,7 @@ if ($status -or -not $hasCommit) {
     }
 
     Write-Host "Staging and committing changes..." -ForegroundColor Gray
-    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore .gitattributes gallery miryam.jpeg robots.txt sitemap.xml
+    git add index.html deploy.ps1 deploy_linux.sh README.md .gitignore .gitattributes gallery miryam.jpeg robots.txt sitemap.xml icons favicon.ico
     Get-ChildItem -File -Filter 'google*.html' | ForEach-Object { git add -- $_.Name }
     git commit -m "$Message"
 }
